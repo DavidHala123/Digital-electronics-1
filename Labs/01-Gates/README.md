@@ -64,3 +64,5 @@ end architecture dataflow;
 
 [EDA Playground link](https://www.edaplayground.com/x/ea5n)
 
+## 4. Distributive laws
+
