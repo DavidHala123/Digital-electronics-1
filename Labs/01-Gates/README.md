@@ -39,4 +39,4 @@ end architecture dataflow;
 
 ## 3. Boolean postulates
 
-![Boolean postulates]()
+![Boolean postulates](images/Postulate_Formula.gif)
