@@ -2,7 +2,7 @@
 
 Odkaz na [Github](https://github.com/DavidHala123/Digital-Electronics-1)
 
-## Rovnice a tabulky
+## 2. Demorgans equations
 **Equatioions**
 
 ![Logic function](images/equations.png)
