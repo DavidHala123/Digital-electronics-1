@@ -16,10 +16,4 @@ Odkaz na [Github](https://github.com/DavidHala123/Digital-Electronics-1)
 | 1 | 1 | 0 |  |   |  |
 | 1 | 1 | 1 |  |   |  |
 
-```LaTeX
-\begin{align*}
-    f(c,b,a) =&~ \overline{b}\,a + \overline{c}\,\overline{b}\\
-    f(c,b,a)_{\textup{NAND}} =&\\
-    f(c,b,a)_{\textup{NOR}} =&\\
-\end{align*}
-```
+Rovnice(Digital-electronics-1/Labs/01-Gates/images/equations.png)
