@@ -3,11 +3,11 @@
 Odkaz na [Github](https://github.com/DavidHala123/Digital-Electronics-1)
 
 ## Rovnice a tabulky
-**Rovnice**
+**Equatioions**
 
 ![Logic function](images/equations.png)
 
-**Tabulky hodnot**
+**Table**
 
 | **a** | **b** |**c** | **f(a,b,c)** |**f(a,b,c)NAND** |**f(a,b,c)NOR** |
 | :-: | :-: | :-: | :-: | :-: | :-: |
