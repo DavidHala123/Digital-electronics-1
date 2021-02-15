@@ -83,3 +83,23 @@ end architecture dataflow;
 | 1 | 1 | 0 | 0 | 0 | 1 | 1 |
 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
 
+
+**Code**
+
+```vhdl
+architecture dataflow of gates is
+begin
+    fa_o  <= ((x_i and y_i) or (x_i and z_i));
+    fb_o  <= (x_i and (y_i or z_i));
+    fc_o  <= ((x_i or y_i) and (x_i or z_i));
+    fd_o  <= (x_i or (y_i and z_i));
+
+end architecture dataflow;
+
+```
+
+**EPWave**
+
+![EPWave](images/4th_part.PNG)
+
+[EDA Playground link](https://www.edaplayground.com/x/ryWL)
