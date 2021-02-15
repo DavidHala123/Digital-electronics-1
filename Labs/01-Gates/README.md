@@ -1,6 +1,6 @@
 ## 1. Git
 
-Odkaz na [Github](https://github.com/DavidHala123/Digital-Electronics-1)
+Link on [Github](https://github.com/DavidHala123/Digital-Electronics-1)
 
 ## 2. Demorgans equations
 **Equatioions**
@@ -35,4 +35,4 @@ end architecture dataflow;
 
 ![EPWave](images/2nd_part.PNG)
 
-![EDAplayground link](https://www.edaplayground.com/x/9xpL)
+[EDAplayground link](https://www.edaplayground.com/x/9xpL)
