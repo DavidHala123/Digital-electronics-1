@@ -66,3 +66,7 @@ end architecture dataflow;
 
 ## 4. Distributive laws
 
+**Equations**
+
+![EPWave](images/Distributive_Laws.gif)
+
