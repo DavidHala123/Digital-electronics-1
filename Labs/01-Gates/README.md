@@ -16,4 +16,4 @@ Odkaz na [Github](https://github.com/DavidHala123/Digital-Electronics-1)
 | 1 | 1 | 0 |  |   |  |
 | 1 | 1 | 1 |  |   |  |
 
-![Logic function](Digital-electronics-1/Labs/01-Gates/images/equations.png)
+![Logic function](images/equations.png)
