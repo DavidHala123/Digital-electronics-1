@@ -5,7 +5,7 @@ Odkaz na [Github](https://github.com/DavidHala123/Digital-Electronics-1)
 ## Rovnice a tabulky
 **Rovnice**
 
-![Logic function](images/equations1.png)
+![Logic function](images/equations2.png)
 
 **Tabulky hodnot**
 
