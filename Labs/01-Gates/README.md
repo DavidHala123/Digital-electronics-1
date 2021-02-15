@@ -16,5 +16,5 @@ Odkaz na [Github](https://github.com/DavidHala123/Digital-Electronics-1)
 | 1 | 1 | 0 | 0 | 0 | 0 |
 | 1 | 1 | 1 | 0 | 0 | 0 |
 
-Rovnice:/n
+
 ![Logic function](images/equations1.png)
