@@ -20,6 +20,8 @@ Odkaz na [Github](https://github.com/DavidHala123/Digital-Electronics-1)
 | 1 | 1 | 0 | 0 | 0 | 0 |
 | 1 | 1 | 1 | 0 | 0 | 0 |
 
+**Code**
+
 ```vhdl
 architecture dataflow of gates is 
 begin 
