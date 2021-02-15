@@ -38,3 +38,5 @@ end architecture dataflow;
 [EDA Playground link](https://www.edaplayground.com/x/iMXV)
 
 ## 3. Boolean postulates
+
+![Boolean postulates]()
