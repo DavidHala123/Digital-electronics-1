@@ -5,7 +5,7 @@ Odkaz na [Github](https://github.com/DavidHala123/Digital-Electronics-1)
 ## 2. Zdrojový kód
 **Source code**
 
-| **a** | **b** |**c** | **f(c,b,a)** |**f(c,b,a)NAND** |**f(c,b,a)NOR** |
+| **a** | **b** |**c** | **f(a,b,c)** |**f(a,b,c)NAND** |**f(a,b,c)NOR** |
 | :-: | :-: | :-: | :-: | :-: | :-: |
 | 0 | 0 | 0 |  |   |  |
 | 0 | 0 | 1 |  |   |  |
