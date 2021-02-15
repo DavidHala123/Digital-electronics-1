@@ -7,6 +7,8 @@ Odkaz na [Github](https://github.com/DavidHala123/Digital-Electronics-1)
 
 ![Logic function](images/equations1.png)
 
+**Tabulky hodnot**
+
 | **a** | **b** |**c** | **f(a,b,c)** |**f(a,b,c)NAND** |**f(a,b,c)NOR** |
 | :-: | :-: | :-: | :-: | :-: | :-: |
 | 0 | 0 | 0 | 1 | 1 | 1 |
