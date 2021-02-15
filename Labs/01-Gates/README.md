@@ -34,3 +34,5 @@ end architecture dataflow;
 **EPWave**
 
 ![EPWave](images/2nd_part.PNG)
+
+![EDAplayground link](https://www.edaplayground.com/x/9xpL)
