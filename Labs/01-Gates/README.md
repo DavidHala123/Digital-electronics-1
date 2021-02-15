@@ -39,4 +39,24 @@ end architecture dataflow;
 
 ## 3. Boolean postulates
 
+**Equations**
+
 ![Boolean postulates](images/Postulate_Formula.gif)
+
+**Code**
+
+```vhdl
+architecture dataflow of gates is 
+begin 
+architecture dataflow of gates is
+begin
+    fa_o  <= (x_i and (not x_i));
+    fb_o  <= (x_i or (not x_i));
+    fc_o  <= (x_i or x_i or x_i);
+    fd_o  <= (x_i and x_i and x_i);
+
+end architecture dataflow;
+```
+
+[EDA Playground link](https://www.edaplayground.com/x/ea5n)
+
