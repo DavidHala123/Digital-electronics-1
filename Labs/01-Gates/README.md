@@ -36,3 +36,5 @@ end architecture dataflow;
 ![EPWave](images/2nd_part.PNG)
 
 [EDA Playground link](https://www.edaplayground.com/x/iMXV)
+
+## 3. Distributive laws
