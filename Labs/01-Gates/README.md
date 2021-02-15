@@ -58,5 +58,9 @@ begin
 end architecture dataflow;
 ```
 
+**EPWave**
+
+![EPWave](images/3rd_part.PNG)
+
 [EDA Playground link](https://www.edaplayground.com/x/ea5n)
 
