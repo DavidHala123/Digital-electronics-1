@@ -244,4 +244,8 @@ Done
 
 ![EPWare](images/EPWare.PNG)
 
+## EDAplayground link
+
+[https://www.edaplayground.com/x/kdn4](https://www.edaplayground.com/x/kdn4)
+
 
