@@ -32,4 +32,16 @@
 
 ![Karnaugh](images/excel_karnaugh.png)
 
-f(b>a) = (b1.!a0) + (b1.!a1) + (b0.!a1.!a0)
+**B>A**
+SOP --> f(b>a) = (b1.!a0) + (b1.!a1) + (b0.!a1.!a0)						
+POS --> f(b>a) = (b1+!a0) . (b1+!a1) . (b0+!a1+!a0)							
+
+**B=A**
+POS --> f(B=A) = (!b1.!b0.!a1.!a0) + (!b1.b0.a1.!a0) + (b1.b0.a1.a0) + (b1.!b0.!a1.a0)												
+SOP --> f(B=A) = (!b1.!b0.!a1.!a0) + (!b1.b0.a1.!a0) + (b1.b0.a1.a0) + (b1.!b0.!a1.a0)											
+
+**B>A**
+POS --> f(B<A) = (b0.!a0) + (b1.b0) + (b1.!a0) + (!a1.!a0)									
+SOP --> f(B<A) = (b0+!a0) . (b1+b0) . (b1+!a0) . (!a1+!a0)									
+
+
