@@ -30,7 +30,7 @@
 
 ## K-maps
 
-![Karnaugh](images/excel_karnaugh2.png)
+![Karnaugh](images/excel_karnaugh3.png)
 
 **B>A:**
 
@@ -50,7 +50,7 @@ SOP --> f(B=A) = (!b1+!b0+!a1+!a0) + (!b1+b0+!a1+a0) + (b1+b0+a1+a0) + (b1+!b0+a
 
 **B<A:**
 
-POS --> f(B<A) = (b0.!a1) + (b1.b0) + (b1.!a0) + (!a1.!a0)
+POS --> f(B<A) = (b0.!a1) + (b1.b0) + (b1.!a1) + (!a1.!a0)
 
 SOP --> f(B<A) = (b0+!a0) . (b1+b0) . (b1+!a0) . (!a1+!a0)
 
