@@ -28,7 +28,7 @@
 **f(B<A) = (b1+b1+a1+a1) . (b1+!b0+a1+a1) . (b1+!b0+a1+!a0) . (!b1+b0+a1+a0) . (!b1+b0+a1+!a0) . (!b1+b0+!a1+a0) . (!b1+!b0+a1+a0) . (!b1+!b0+a1+!a0) . (!b1+!b0+!a1+a0) . (!b1+!b0+!a1+!a0)**
 
 
-## Kargnauphovy mapy
+## K-maps
 
 ![Karnaugh](images/excel_karnaugh.png)
 
@@ -53,5 +53,8 @@ SOP --> f(B=A) = (!b1.!b0.!a1.!a0) + (!b1.b0.a1.!a0) + (b1.b0.a1.a0) + (b1.!b0.!
 POS --> f(B<A) = (b0.!a0) + (b1.b0) + (b1.!a0) + (!a1.!a0)
 
 SOP --> f(B<A) = (b0+!a0) . (b1+b0) . (b1+!a0) . (!a1+!a0)
+
+##Code
+
 
 
