@@ -1,105 +1,27 @@
-## 1. Git
+# Digital-electronics-1
 
-Link on [Github](https://github.com/DavidHala123/Digital-Electronics-1)
 
-## 2. Demorgans equations
-**Equatioions**
+## Logic table
 
-![Logic function](images/equations.png)
 
-**Table**
-
-| **a** | **b** |**c** | **f(a,b,c)** |**f(a,b,c)NAND** |**f(a,b,c)NOR** |
+| **Dec. equivalent** | **B[1:0]** | **A[1:0]** | **B is greater than A** | **B equals A** | **B is less than A** |
 | :-: | :-: | :-: | :-: | :-: | :-: |
-| 0 | 0 | 0 | 1 | 1 | 1 |
-| 0 | 0 | 1 | 1 | 1 | 1 |
-| 0 | 1 | 0 | 0 | 0 | 0 |
-| 0 | 1 | 1 | 0 | 0 | 0 |
-| 1 | 0 | 0 | 0 | 0 | 0 |
-| 1 | 0 | 1 | 1 | 1 | 1 |
-| 1 | 1 | 0 | 0 | 0 | 0 |
-| 1 | 1 | 1 | 0 | 0 | 0 |
-
-**Code**
-
-```vhdl
-architecture dataflow of gates is 
-begin 
-	 f_o <= ((not b_i) and a_i) or ((not c_i) and (not b_i));
-     fnand_o <= not ((not ((not b_i) and a_i)) and (not((not c_i) and (not b_i))));
-     fnor_o <= not(b_i or (not a_i)) or (not (c_i or b_i));
-     
-end architecture dataflow;
-```
-**EPWave**
-
-![EPWave](images/2nd_part.PNG)
-
-[EDA Playground link](https://www.edaplayground.com/x/iMXV)
-
-## 3. Boolean postulates
-
-**Equations**
-
-![Boolean postulates](images/Postulate_Formula.gif)
-
-**Code**
-
-```vhdl
-architecture dataflow of gates is 
-begin 
-architecture dataflow of gates is
-begin
-    fa_o  <= (x_i and (not x_i));
-    fb_o  <= (x_i or (not x_i));
-    fc_o  <= (x_i or x_i or x_i);
-    fd_o  <= (x_i and x_i and x_i);
-
-end architecture dataflow;
-```
-
-**EPWave**
-
-![EPWave](images/3rd_part.PNG)
-
-[EDA Playground link](https://www.edaplayground.com/x/ea5n)
-
-## 4. Distributive laws
-
-**Equations**
-
-![EPWave](images/Distributive_Laws.gif)
-
-**Table**
-
-| **x** | **y** |**z** | **x.y+x.z** |**x.(y+z)** |**(x+y).(x.z)** |**x+(y.z)** |
-| :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-| 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| 0 | 0 | 1 | 0 | 0 | 1 | 1 |
-| 0 | 1 | 0 | 0 | 0 | 0 | 0 |
-| 0 | 1 | 1 | 1 | 1 | 1 | 1 |
-| 1 | 0 | 0 | 0 | 0 | 0 | 0 |
-| 1 | 0 | 1 | 1 | 1 | 1 | 1 |
-| 1 | 1 | 0 | 0 | 0 | 1 | 1 |
-| 1 | 1 | 1 | 1 | 1 | 1 | 1 |
+| 0 | 0 0 | 0 0 | 0 | 1 | 0 |
+| 1 | 0 0 | 0 1 | 0 | 0 | 1 |
+| 2 | 0 0 | 1 0 | 0 | 0 | 1 |
+| 3 | 0 0 | 1 1 | 0 | 0 | 1 |
+| 4 | 0 1 | 0 0 | 1 | 0 | 0 |
+| 5 | 0 1 | 0 1 | 0 | 1 | 0 |
+| 6 | 0 1 | 1 0 | 0 | 0 | 1 |
+| 7 | 0 1 | 1 1 | 0 | 0 | 1 |
+| 8 | 1 0 | 0 0 | 1 | 0 | 0 |
+| 9 | 1 0 | 0 1 | 1 | 0 | 0 |
+| 10 | 1 0 | 1 0 | 0 | 1 | 0 |
+| 11 | 1 0 | 1 1 | 0 | 0 | 1 |
+| 12 | 1 1 | 0 0 | 1 | 0 | 0 |
+| 13 | 1 1 | 0 1 | 1 | 0 | 0 |
+| 14 | 1 1 | 1 0 | 1 | 0 | 0 |
+| 15 | 1 1 | 1 1 | 0 | 1 | 0 |
 
 
-**Code**
 
-```vhdl
-architecture dataflow of gates is
-begin
-    fa_o  <= ((x_i and y_i) or (x_i and z_i));
-    fb_o  <= (x_i and (y_i or z_i));
-    fc_o  <= ((x_i or y_i) and (x_i or z_i));
-    fd_o  <= (x_i or (y_i and z_i));
-
-end architecture dataflow;
-
-```
-
-**EPWave**
-
-![EPWave](images/4th_part.PNG)
-
-[EDA Playground link](https://www.edaplayground.com/x/ryWL)
