@@ -237,3 +237,22 @@ end architecture testbench;
 ```
 
 
+## Log
+```
+[2021-02-22 09:37:44 EST] ghdl -i design.vhd testbench.vhd  && ghdl -m  tb_comparator_4bit && ghdl -r  tb_comparator_4bit   --vcd=dump.vcd && sed -i 's/^U/X/g; s/^-/X/g; s/^H/1/g; s/^L/0/g' dump.vcd 
+analyze design.vhd
+analyze testbench.vhd
+elaborate tb_comparator_4bit
+testbench.vhd:34:9:@0ms:(report note): Stimulus process started
+testbench.vhd:46:9:@200ns:(assertion error): Chyba pro vstupní kombinaci: 0100, 0001
+testbench.vhd:58:9:@400ns:(assertion error): Chyba pro vstupní kombinaci: 0100, 0011
+testbench.vhd:64:9:@500ns:(assertion error): Chyba pro vstupní kombinaci: 0101, 0100
+testbench.vhd:138:9:@1600ns:(report note): Stimulus process finished
+Finding VCD file...
+./dump.vcd
+[2021-02-22 09:37:46 EST] Opening EPWave...
+Done
+
+```
+
+
