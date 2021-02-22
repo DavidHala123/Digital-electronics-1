@@ -30,4 +30,6 @@
 
 ## Kargnauphovy mapy
 
+Labs/02-Logic/images/excel karnaugh.png
+
 f(b>a) = (b1.!a0) + (b1.!a1) + (b0.!a1.!a0)
