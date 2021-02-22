@@ -1,7 +1,4 @@
-# Digital-electronics-1
-
-
-## Logic table
+## 1.Logic table
 
 
 | **Dec. equivalent** | **B[1:0]** | **A[1:0]** | **B is greater than A** | **B equals A** | **B is less than A** |
