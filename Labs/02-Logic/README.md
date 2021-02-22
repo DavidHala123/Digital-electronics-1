@@ -30,7 +30,7 @@
 
 ## K-maps
 
-![Karnaugh](images/excel_karnaugh.png)
+![Karnaugh](images/excel_karnaugh1.png)
 
 **B>A:**
 
