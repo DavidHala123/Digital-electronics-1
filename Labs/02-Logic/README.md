@@ -54,7 +54,7 @@ POS --> f(B<A) = (b0.!a0) + (b1.b0) + (b1.!a0) + (!a1.!a0)
 
 SOP --> f(B<A) = (b0+!a0) . (b1+b0) . (b1+!a0) . (!a1+!a0)
 
-##Code
+## Code
 
 **design.vhdl**
 
