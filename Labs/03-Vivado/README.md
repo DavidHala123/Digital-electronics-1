@@ -122,11 +122,6 @@ end architecture testbench;
 
 ![Simulation](images/Simulation.PNG)
 
-## EDAplayground link
-
-[https://www.edaplayground.com/x/qvYn](https://www.edaplayground.com/x/qvYn)
-
-
 ## Vivado tutorial
 
 **New project**
