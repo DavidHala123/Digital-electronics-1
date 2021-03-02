@@ -149,7 +149,8 @@ end architecture testbench;
 9. Click "Ok"
 ![EPWare](images/9.PNG)
 
-## Add testbench file
+**Add testbench file**
+
 1. File -> Add Sources...
 ![EPWare](images/10.PNG)
 2. Check "Add or create simulation sources"
