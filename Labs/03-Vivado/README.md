@@ -56,162 +56,93 @@ SOP --> f(B<A) = (b0+!a0) . (b1+b0) . (b1+!a0) . (!a1+!a0)
 
 ## Code
 
-**design.vhdl**
+**mux_2bit_4to1.vhdl**
 
 ```vhdl
 library IEEE;
-use IEEE.std_logic_1164.all;
+use IEEE.STD_LOGIC_1164.ALL;
 
 
-entity comparator_4bit is
-    port(
-        a_i           : in  std_logic_vector(4 - 1 downto 0);
-        b_i           : in  std_logic_vector(4 - 1 downto 0);
+entity mux_2bit_4to1 is
+    port (
+          a_i   : in std_logic_vector(2 - 1 downto 0);
+          b_i   : in std_logic_vector(2 - 1 downto 0);
+          c_i   : in std_logic_vector(2 - 1 downto 0);
+          d_i   : in std_logic_vector(2 - 1 downto 0);
+          sel_i : in std_logic_vector(2 - 1 downto 0);
+          
+          f_o   : out std_logic_vector(2 - 1 downto 0)
+         );
+end entity mux_2bit_4to1;
 
-        
-
-        B_greater_A_o : out std_logic;
-        B_equals_A_o  : out std_logic;
-        B_less_A_o    : out std_logic      
-    );
-end entity comparator_4bit;
-
-
-architecture Behavioral of comparator_4bit is
+architecture Behavioral of mux_2bit_4to1 is
 begin
 
-    B_greater_A_o  <= '1' when (b_i > a_i) else '0';
-    B_equals_A_o   <= '1' when (b_i = a_i) else '0';
-    B_less_A_o     <= '1' when (b_i < a_i) else '0';
+    f_o <= a_i when (sel_i = "00") else
+           b_i when (sel_i = "01") else
+           c_i when (sel_i = "10") else
+           d_i;
 
-
-end architecture Behavioral;
-
+end Behavioral;
 ```
 
-**testbench.vhdl**
+**tb_mux_2bit_4to1.vhdl**
 
 ```vhdl
-library IEEE;
-use IEEE.std_logic_1164.all;
+library ieee;
+use ieee.std_logic_1164.all;
 
 
-entity tb_comparator_4bit is
+entity tb_mux_2bit_4to1 is
 
-end entity tb_comparator_4bit;
+end entity tb_mux_2bit_4to1;
 
+architecture testbench of tb_mux_2bit_4to1 is
 
-architecture testbench of tb_comparator_4bit is
-
-    signal s_a       : std_logic_vector(4 - 1 downto 0);
-    signal s_b       : std_logic_vector(4 - 1 downto 0);
-    signal s_B_greater_A : std_logic;
-    signal s_B_equals_A  : std_logic;
-    signal s_B_less_A    : std_logic;
+    signal s_a       : std_logic_vector(2 - 1 downto 0);
+    signal s_b       : std_logic_vector(2 - 1 downto 0);
+    signal s_c       : std_logic_vector(2 - 1 downto 0);
+    signal s_d       : std_logic_vector(2 - 1 downto 0);
+    signal s_sel       : std_logic_vector(2 - 1 downto 0);
+    
+    signal s_f       : std_logic_vector(2 - 1 downto 0);
 
 begin
 
-    uut_comparator_4bit : entity work.comparator_4bit
+    uut_mux_2bit_4to1 : entity work.mux_2bit_4to1
         port map(
             a_i           => s_a,
             b_i           => s_b,
-            B_greater_A_o => s_B_greater_A,
-            B_equals_A_o  => s_B_equals_A,
-            B_less_A_o    => s_B_less_A
+            c_i           => s_c,
+            d_i           => s_d,
+            sel_i           => s_sel,
+            f_o           => s_f
         );
 
-   
+
     p_stimulus : process
     begin
-        
+        -- Report a note at the begining of stimulus process
         report "Stimulus process started" severity note;
 
-
-
-        s_b <= "0000"; s_a <= "0000"; 
-        wait for 100 ns;
-        assert ((s_B_greater_A = '0') and (s_B_equals_A = '1') and (s_B_less_A = '0'))
-        report "Chyba pro kombinaci: 0000, 0000" severity error;
+        s_d <= "00"; s_c <= "01"; s_b <= "01"; s_a <= "01"; s_sel <= "00"; wait for 50 ns;
         
-        s_b <= "0100"; s_a <= "0001"; 
-        wait for 100 ns;
-        assert ((s_B_greater_A = '1') and (s_B_equals_A = '1') and (s_B_less_A = '0'))
-        report "Chyba pro vstupní hodnoty: 0100, 0001" severity error;
-       
-        s_b <= "0100"; s_a <= "0010"; 
-        wait for 100 ns;
-        assert ((s_B_greater_A = '1') and (s_B_equals_A = '0') and (s_B_less_A = '0'))
-        report "Chyba pro vstupní hodnoty: 0100, 0010" severity error;
+        s_a <= "00"; wait for 50 ns;
+        s_b <= "11"; wait for 50 ns;
         
-        s_b <= "0100"; s_a <= "0011"; 
-        wait for 100 ns;
-        assert ((s_B_greater_A = '1') and (s_B_equals_A = '0') and (s_B_less_A = '1'))
-        report "Chyba pro vstupní hodnoty: 0100, 0011" severity error;
-
-		s_b <= "0101"; s_a <= "0100"; 
-        wait for 100 ns;
-        assert ((s_B_greater_A = '0') and (s_B_equals_A = '0') and (s_B_less_A = '0'))
-        report "Chyba pro vstupní hodnoty: 0101, 0100" severity error;
+        s_sel <= "01"; wait for 50 ns;
+        s_c <= "01"; wait for 50 ns;
+        s_b <= "10"; wait for 50 ns;  
         
-        s_b <= "0101"; s_a <= "0101"; 
-        wait for 100 ns;
-        assert ((s_B_greater_A = '0') and (s_B_equals_A = '1') and (s_B_less_A = '0'))
-        report "Chyba pro vstupní hodnoty: 0101, 0101" severity error;
+        s_d <= "11";  s_c <= "11"; s_b <= "01"; s_a <= "00"; 
+        s_sel <= "10"; wait for 50 ns;  
         
-        s_b <= "0101"; s_a <= "0110"; 
-        wait for 100 ns;
-        assert ((s_B_greater_A = '0') and (s_B_equals_A = '0') and (s_B_less_A = '1'))
-        report "Chyba pro vstupní hodnoty: 0101, 0110" severity error;
+        s_d <= "01";  s_c <= "00"; s_b <= "00"; s_a <= "01"; 
+        s_sel <= "11"; wait for 50 ns;  
         
-        s_b <= "0101"; s_a <= "0111"; 
-        wait for 100 ns;
-        assert ((s_B_greater_A = '0') and (s_B_equals_A = '0') and (s_B_less_A = '1'))
-        report "Chyba pro vstupní hodnoty: 0101, 0111" severity error;
-        
-        s_b <= "1110"; s_a <= "0100"; 
-        wait for 100 ns;
-        assert ((s_B_greater_A = '1') and (s_B_equals_A = '0') and (s_B_less_A = '0'))
-        report "Chyba pro vstupní hodnoty: 1110, 0100" severity error;
-        
-        s_b <= "1110"; s_a <= "0101"; 
-        wait for 100 ns;
-        assert ((s_B_greater_A = '1') and (s_B_equals_A = '0') and (s_B_less_A = '0'))
-        report "Chyba pro vstupní hodnoty: 1110, 0101" severity error;
-        
-        s_b <= "1110"; s_a <= "0110"; 
-        wait for 100 ns;
-        assert ((s_B_greater_A = '1') and (s_B_equals_A = '0') and (s_B_less_A = '0'))
-        report "Chyba pro vstupní hodnoty: 1110, 0110" severity error;
-        
-         s_b <= "1110"; s_a <= "0111"; 
-        wait for 100 ns;
-        assert ((s_B_greater_A = '1') and (s_B_equals_A = '0') and (s_B_less_A = '0'))
-        report "Chyba pro vstupní hodnoty: 1110, 0111" severity error;
-        
-        s_b <= "1111"; s_a <= "0100"; 
-        wait for 100 ns;
-        assert ((s_B_greater_A = '1') and (s_B_equals_A = '0') and (s_B_less_A = '0'))
-        report "Chyba pro vstupní hodnoty: 1111, 0100" severity error;
-        
-        s_b <= "1111"; s_a <= "1101"; 
-        wait for 100 ns;
-        assert ((s_B_greater_A = '1') and (s_B_equals_A = '0') and (s_B_less_A = '0'))
-        report "Chyba pro vstupní hodnoty: 1111, 1101" severity error;
-        
-        s_b <= "1111"; s_a <= "1110"; 
-        wait for 100 ns;
-        assert ((s_B_greater_A = '1') and (s_B_equals_A = '0') and (s_B_less_A = '0'))
-        report "Chyba pro vstupní hodnoty: 1111, 1110" severity error;
-        
-        s_b <= "1111"; s_a <= "1111"; 
-        wait for 100 ns;
-        assert ((s_B_greater_A = '0') and (s_B_equals_A = '1') and (s_B_less_A = '0'))
-        report "Chyba pro vstupní hodnoty: 1111, 1111" severity error;
-
-
-        
-        
-       
+        s_d <= "11";  s_c <= "11"; s_b <= "01"; s_a <= "00"; 
+        s_sel <= "10"; wait for 50 ns; 
+               
         report "Stimulus process finished" severity note;
         wait;
     end process p_stimulus;
@@ -220,22 +151,6 @@ end architecture testbench;
 ```
 
 
-## Log
-```
-analyze design.vhd
-analyze testbench.vhd
-elaborate tb_comparator_4bit
-testbench.vhd:33:9:@0ms:(report note): Stimulus process started
-testbench.vhd:44:9:@200ns:(assertion error): Chyba pro vstupní hodnoty: 0100, 0001
-testbench.vhd:54:9:@400ns:(assertion error): Chyba pro vstupní hodnoty: 0100, 0011
-testbench.vhd:59:9:@500ns:(assertion error): Chyba pro vstupní hodnoty: 0101, 0100
-testbench.vhd:121:9:@1600ns:(report note): Stimulus process finished
-Finding VCD file...
-./dump.vcd
-[2021-02-23 05:49:04 EST] Opening EPWave...
-Done
-
-```
 
 ## EPWare
 
