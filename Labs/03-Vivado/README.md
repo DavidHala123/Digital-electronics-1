@@ -130,32 +130,32 @@ end architecture testbench;
 ## Vivado tutorial
 
 **New project**
-1. Create new project (Quick start -> Create Project)
+    1. Create new project (Quick start -> Create Project)
 ![EPWare](images/1.PNG)
-2. Click "Next"
+    2. Click "Next"
 ![EPWare](images/2.PNG)
-3. Name your project and select folder to save your project in
+    3. Name your project and select folder to save your project in
 ![EPWare](images/3.PNG)
-4. Check "RTL Project"
+    4. Check "RTL Project"
 ![EPWare](images/4.PNG)
-5. Create Source file
+    5. Create Source file
 ![EPWare](images/5.PNG)
-6. Click "Next"
+    6. Click "Next"
 ![EPWare](images/6.PNG)
-7. Select "Boards" in the upper part of the window. Then select your board
+    7. Select "Boards" in the upper part of the window. Then select your board
 ![EPWare](images/7.PNG)
-8. Click "Finish"
+    8. Click "Finish"
 ![EPWare](images/8.PNG)
-9. Click "Ok"
+    9. Click "Ok"
 ![EPWare](images/9.PNG)
 
 ## Add testbench file
-1. File -> Add Sources...
+    1. File -> Add Sources...
 ![EPWare](images/10.PNG)
-2. Check "Add or create simulation sources"
+    2. Check "Add or create simulation sources"
 ![EPWare](images/11.PNG)
-3. Select your File type and name
+    3. Select your File type and name
 ![EPWare](images/12.PNG)
-4. Done
+    4. Done
 ![EPWare](images/13.PNG)
 
