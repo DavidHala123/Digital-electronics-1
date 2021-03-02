@@ -20,40 +20,6 @@
 | 14 | 1 1 | 1 0 | 1 | 0 | 0 |
 | 15 | 1 1 | 1 1 | 0 | 1 | 0 |
 
-
-
-**f(B=a) = (!b1.!b0.!a1.!a0) + (!b1.b0.!a1.a0) + (b1.!b0.a1.!a0) + (b1.b0.a1.a0)**
-
-
-**f(B<A) = (b1+b1+a1+a1) . (b1+!b0+a1+a1) . (b1+!b0+a1+!a0) . (!b1+b0+a1+a0) . (!b1+b0+a1+!a0) . (!b1+b0+!a1+a0) . (!b1+!b0+a1+a0) . (!b1+!b0+a1+!a0) . (!b1+!b0+!a1+a0) . (!b1+!b0+!a1+!a0)**
-
-
-## K-maps
-
-![Karnaugh](images/excel_karnaugh3.png)
-
-**B>A:**
-
-SOP --> f(b>a) = (b1.!a1) + (b1.!a0) + (b0.!a1.!a0)
-
-POS --> f(b>a) = (b1+!a1) . (b1+!a0) . (b0+!a1+!a0)
-
-
-
-**B=A:**
-
-POS --> f(B=A) = (!b1.!b0.!a1.!a0) + (!b1.b0.!a1.a0) + (b1.b0.a1.a0) + (b1.!b0.a1.!a0)
-
-SOP --> f(B=A) = (!b1+!b0+!a1+!a0) . (!b1+b0+!a1+a0) . (b1+b0+a1+a0) . (b1+!b0+a1+!a0)
-
-
-
-**B<A:**
-
-POS --> f(B<A) = (b0.!a1) + (b1.b0) + (b1.!a1) + (!a1.!a0)
-
-SOP --> f(B<A) = (b0+!a0) . (b1+b0) . (b1+!a0) . (!a1+!a0)
-
 ## Code
 
 **mux_2bit_4to1.vhdl**
@@ -160,4 +126,22 @@ end architecture testbench;
 
 [https://www.edaplayground.com/x/qvYn](https://www.edaplayground.com/x/qvYn)
 
+
+## Vivado tutorial
+
+**New project**
+
+![EPWare](images/1.PNG)
+![EPWare](images/2.PNG)
+![EPWare](images/3.PNG)
+![EPWare](images/4.PNG)
+![EPWare](images/5.PNG)
+![EPWare](images/6.PNG)
+![EPWare](images/7.PNG)
+![EPWare](images/8.PNG)
+![EPWare](images/9.PNG)
+![EPWare](images/10.PNG)
+![EPWare](images/11.PNG)
+![EPWare](images/12.PNG)
+![EPWare](images/13.PNG)
 
