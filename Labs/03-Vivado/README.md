@@ -118,9 +118,9 @@ end architecture testbench;
 
 
 
-## EPWare
+## Simulation
 
-![EPWare](images/EPWare.PNG)
+![Simulation](images/Simulation.PNG)
 
 ## EDAplayground link
 
@@ -131,32 +131,32 @@ end architecture testbench;
 
 **New project**
 1. Create new project (Quick start -> Create Project)
-![EPWare](images/1.PNG)
+![step1](images/1.PNG)
 2. Click "Next"
-![EPWare](images/2.PNG)
+![step2](images/2.PNG)
 3. Name your project and select folder to save your project in
-![EPWare](images/3.PNG)
+![step3](images/3.PNG)
 4. Check "RTL Project"
-![EPWare](images/4.PNG)
+![step4](images/4.PNG)
 5. Create Source file
-![EPWare](images/5.PNG)
+![step5](images/5.PNG)
 6. Click "Next"
-![EPWare](images/6.PNG)
+![step6](images/6.PNG)
 7. Select "Boards" in the upper part of the window. Then select your board
-![EPWare](images/7.PNG)
+![step7](images/7.PNG)
 8. Click "Finish"
-![EPWare](images/8.PNG)
+![step8](images/8.PNG)
 9. Click "Ok"
-![EPWare](images/9.PNG)
+![step9](images/9.PNG)
 
 **Add testbench file**
 
 1. File -> Add Sources...
-![EPWare](images/10.PNG)
+![step1](images/10.PNG)
 2. Check "Add or create simulation sources"
-![EPWare](images/11.PNG)
+![step2](images/11.PNG)
 3. Select your File type and name
-![EPWare](images/12.PNG)
+![step3](images/12.PNG)
 4. Done
-![EPWare](images/13.PNG)
+![step4](images/13.PNG)
 
