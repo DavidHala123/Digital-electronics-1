@@ -123,7 +123,7 @@ end architecture testbench;
 
 ![Simulation](images/Simulation1.PNG)
 
-## Vivado tutorial
+## 3. Vivado tutorial
 
 **New project**
 1. Create new project (Quick start -> Create Project)
