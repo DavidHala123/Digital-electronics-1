@@ -147,7 +147,7 @@ end architecture testbench;
 **Add testbench file**
 
 1. File -> Add Sources...
-![step21](images/10.PNG)
+![step21](images/10.png)
 2. Check "Add or create simulation sources"
 ![step22](images/11.PNG)
 3. Select your File type and name
