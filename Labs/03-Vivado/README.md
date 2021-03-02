@@ -1,4 +1,4 @@
-## 1.Logic table
+## 1.Table with connections
 
 | **LED** | **Connection** | **Switch** | **Connection** | 
 | :-: | :-: | :-: | :-: |
@@ -19,7 +19,7 @@
 | LED14 | V12 | SW14 | U11 |
 | LED15 | V11 | SW15 | V10 |
 
-## Code
+## 2. Code
 
 **mux_2bit_4to1.vhdl**
 
@@ -119,7 +119,7 @@ end architecture testbench;
 
 
 
-## Simulation
+**Simulation**
 
 ![Simulation](images/Simulation1.PNG)
 
