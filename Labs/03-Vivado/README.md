@@ -120,7 +120,7 @@ end architecture testbench;
 
 ## Simulation
 
-![Simulation](images/Simulation.PNG)
+![Simulation](images/Simulation1.PNG)
 
 ## Vivado tutorial
 
