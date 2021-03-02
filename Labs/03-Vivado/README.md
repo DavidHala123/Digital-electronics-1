@@ -126,32 +126,45 @@ end architecture testbench;
 
 **New project**
 1. Create new project (Quick start -> Create Project)
+
 ![step1](images/1.PNG)
 2. Click "Next"
+
 ![step2](images/2.PNG)
 3. Name your project and select folder to save your project in
+
 ![step3](images/3.PNG)
 4. Check "RTL Project"
+
 ![step4](images/4.PNG)
 5. Create Source file
+
 ![step5](images/5.PNG)
 6. Click "Next"
+
 ![step6](images/6.PNG)
 7. Select "Boards" in the upper part of the window. Then select your board
+
 ![step7](images/7.PNG)
 8. Click "Finish"
+
 ![step8](images/8.PNG)
 9. Click "Ok"
+
 ![step9](images/9.PNG)
 
 **Add testbench file**
 
 1. File -> Add Sources...
+
 ![step21](images/10.png)
 2. Check "Add or create simulation sources"
+
 ![step22](images/11.PNG)
 3. Select your File type and name
+
 ![step23](images/12.PNG)
 4. Done
+
 ![step24](images/13.PNG)
 
