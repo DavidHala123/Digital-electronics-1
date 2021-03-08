@@ -1,4 +1,4 @@
-##Preparation##
+# Preparation
 
 | **Hex** | **Inputs** | **A** | **B** | **C** | **D** | **E** | **F** | **G** |
 | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
@@ -19,7 +19,7 @@
 | E | 1110 | 0 | 1 | 1 | 0 | 0 | 0 | 0 |
 | F | 1111 | 0 | 1 | 1 | 1 | 0 | 0 | 0 |
 
-#Part 2 seg7
+# Part 2 seg7
 
 
 
@@ -168,7 +168,7 @@ end Behavioral;
 
 ```
 
-#Part 3 top
+# Part 3 top
 
 
 **top.vhdl**
