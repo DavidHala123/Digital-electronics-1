@@ -19,6 +19,8 @@
 | E | 1110 | 0 | 1 | 1 | 0 | 0 | 0 | 0 |
 | F | 1111 | 0 | 1 | 1 | 1 | 0 | 0 | 0 |
 
+##Part 2 seg7##
+
 ##Code#
 
 **hex_7seg.vhdl**
@@ -165,6 +167,10 @@ begin
 end Behavioral;
 
 ```
+
+##Part 3 top##
+
+**code**
 
 **top.vhdl**
 
