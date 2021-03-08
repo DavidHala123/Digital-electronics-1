@@ -168,6 +168,8 @@ end Behavioral;
 
 ```
 
+**Simulation**
+
 ![Simulace seg7](images/simulation_seg7.PNG)
 
 ## Part 3 - top
@@ -324,5 +326,7 @@ p_stimulus : process
 end Behavioral;
 
 ```
+
+**Simulation**
 
 ![Simulace top](images/simulation_top.PNG)
