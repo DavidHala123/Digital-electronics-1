@@ -168,7 +168,7 @@ end Behavioral;
 
 ```
 
-![Simulace seg7](images/simulation_seg7.PNG)
+![Simulace seg7](images/simulation seg7.PNG)
 
 ## Part 3 - top
 
