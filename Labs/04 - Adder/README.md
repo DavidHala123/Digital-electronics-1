@@ -21,7 +21,7 @@
 
 ##Part 2 seg7##
 
-##Code#
+
 
 **hex_7seg.vhdl**
 
@@ -168,9 +168,8 @@ end Behavioral;
 
 ```
 
-##Part 3 top##
+##Part 3 top
 
-**code**
 
 **top.vhdl**
 
