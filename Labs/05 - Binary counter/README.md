@@ -1,172 +1,132 @@
 ## Preparation
 
-| **Hex** | **Inputs** | **A** | **B** | **C** | **D** | **E** | **F** | **G** |
-| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-| 0 | 0000 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
-| 1 | 0001 | 1 | 0 | 0 | 1 | 1 | 1 | 1 |
-| 2 | 0010 | 0 | 0 | 1 | 0 | 0 | 1 | 0 |
-| 3 | 0011 | 0 | 0 | 0 | 0 | 1 | 1 | 0 |
-| 4 | 0100 | 1 | 0 | 0 | 1 | 1 | 0 | 0 |
-| 5 | 0101 | 0 | 1 | 0 | 0 | 1 | 0 | 0 |
-| 6 | 0110 | 0 | 1 | 0 | 0 | 0 | 0 | 0 |
-| 7 | 0111 | 0 | 0 | 0 | 1 | 1 | 1 | 1 |
-| 8 | 1000 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| 9 | 1001 | 0 | 0 | 0 | 0 | 0 | 1 | 0 |
-| A | 1010 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
-| b | 1011 | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
-| C | 1100 | 0 | 1 | 1 | 0 | 0 | 0 | 1 |
-| d | 1101 | 1 | 0 | 0 | 0 | 0 | 1 | 0 |
-| E | 1110 | 0 | 1 | 1 | 0 | 0 | 0 | 0 |
-| F | 1111 | 0 | 1 | 1 | 1 | 0 | 0 | 0 |
 
-## Part 2 - seg7
+   | **Time interval** | **Number of clk periods** | **Number of clk periods in hex** | **Number of clk periods in binary** |
+   | :-: | :-: | :-: | :-: |
+   | 2&nbsp;ms | 200 000 | `x"3_0d40"` | `b"0011_0000_1101_0100_0000"` |
+   | 4&nbsp;ms | 400 000 | `x"6_1A80"` | `b"0110_0001_1010_1000_0000"` |
+   | 10&nbsp;ms | 1 000 000 | `x"F_4240"` | `b"1111_0100_0010_0100_0000"` |
+   | 250&nbsp;ms | 25 000 000 | `x"17D_7840"` | `b"0001_0111_1101_0111_1000_0100_0000"` |
+   | 500&nbsp;ms | 50 000 000 | `x"2FA_F080"` | `b"0010_1111_1010_1111_0000_1000_0000"` |
+   | 1&nbsp;sec | 100 000 000 | `x"5F5_E100"` | `b"0101_1111_0101_1110_0001_0000_0000"` |
+
+## Part 2 - Bidirectional counter
 
 
 
-**hex_7seg.vhdl**
+**p_cnt_up_down**
 
 ```vhdl
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-
-entity hex_7seg is
-   Port ( 
-        hex_i : in STD_LOGIC_VECTOR (4-1 downto 0);
-        seg_o : out STD_LOGIC_VECTOR (7-1 downto 0)
-         );
-end hex_7seg;
-
-architecture Behavioral of hex_7seg is
-
-begin
-
-    p_7seg_decoder : process(hex_i)
+    p_cnt_up_down : process(clk)
     begin
-        case hex_i is
-            when "0000" =>
-                seg_o <= "0000001";     -- 0
-            
-            when "0001" =>
-                seg_o <= "1001111";     -- 1
-            
-            when "0010" =>
-                seg_o <= "0010010";     -- 2
-            
-            when "0011" =>
-                seg_o <= "0000110";     -- 3
-            
-            when "0100" =>
-                seg_o <= "1001100";     -- 4
-            
-            when "0101" =>
-                seg_o <= "0100100";     -- 5
-            
-            when "0110" =>
-                seg_o <= "0100000";     -- 6
-            
-            when "0111" =>
-                seg_o <= "0001111";     -- 7
-            
-            when "1000" =>
-                seg_o <= "0000000";     -- 8
-            
-            when "1001" =>
-                seg_o <= "0000010";     -- 9
-            
-            when "1010" =>
-                seg_o <= "0001000";     -- A
-            
-            when "1011" =>
-                seg_o <= "1100000";     -- b
-            
-            when "1100" =>
-                seg_o <= "0110001";     -- C
-            
-            when "1101" =>
-                seg_o <= "1000010";     -- d    
-            
-            when "1110" =>
-                seg_o <= "0110000";     -- E
-            
-            when others =>
-                seg_o <= "0111000";     -- F
-        end case;
-    end process p_7seg_decoder;
+        if rising_edge(clk) then
+        
+            if (reset = '1') then               -- Synchronous reset
+                s_cnt_local <= (others => '0'); -- Clear all bits
 
-
-end Behavioral;
+            elsif (en_i = '1') then       -- Test if counter is enabled
+                -- TEST COUNTER DIRECTION HERE
+                if (cnt_up_i = '1') then
+                    s_cnt_local <= s_cnt_local + 1;
+                else
+                    s_cnt_local <= s_cnt_local - 1;
+                end if;
+            end if;
+        end if;
+    end process p_cnt_up_down;
 
 ```
 
-**tb_hex_7seg**
+**tb_cmt_up_down**
 
 ```vhdl
 
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
+library ieee;
+use ieee.std_logic_1164.all;
 
+entity tb_cnt_up_down is
+    -- Entity of testbench is always empty
+end entity tb_cnt_up_down; 
 
-entity tb_hex_7seg is
---  Port ( );
-end tb_hex_7seg;
+architecture testbench of tb_cnt_up_down is
 
-architecture Behavioral of tb_hex_7seg is
+    -- Number of bits for testbench counter
+    constant c_CNT_WIDTH         : natural := 4;
+    constant c_CLK_100MHZ_PERIOD : time    := 10 ns;
 
-    signal s_hex : STD_LOGIC_VECTOR (4-1 downto 0);
-    signal s_seg : STD_LOGIC_VECTOR (7-1 downto 0);
-
+    --Local signals
+    signal s_clk_100MHz : std_logic;
+    signal s_reset      : std_logic;
+    signal s_en         : std_logic;
+    signal s_cnt_up     : std_logic;
+    signal s_cnt        : std_logic_vector(c_CNT_WIDTH - 1 downto 0);
 
 begin
-    uut_hex_7seg  : entity work.hex_7seg
-        port map (
-        
-        hex_i => s_hex,
-        seg_o => s_seg
+    -- Connecting testbench signals with cnt_up_down entity
+    -- (Unit Under Test)
+    uut_cnt : entity work.cnt_up_down
+        generic map(
+            g_CNT_WIDTH  => c_CNT_WIDTH
+        )
+        port map(
+            clk      => s_clk_100MHz,
+            reset    => s_reset,
+            en_i     => s_en,
+            cnt_up_i => s_cnt_up,
+            cnt_o    => s_cnt
         );
+
+    p_clk_gen : process
+    begin
+        while now < 750 ns loop         -- 75 periods of 100MHz clock
+            s_clk_100MHz <= '0';
+            wait for c_CLK_100MHZ_PERIOD / 2;
+            s_clk_100MHz <= '1';
+            wait for c_CLK_100MHZ_PERIOD / 2;
+        end loop;
+        wait;
+    end process p_clk_gen;
+
+    p_reset_gen : process
+    begin
+        s_reset <= '0';
+        wait for 30 ns;
+        
+        -- Reset activated
+        s_reset <= '1';
+        wait for 60 ns;
+       
+        s_reset <= '0';
+        wait;
+    end process p_reset_gen;
 
     p_stimulus : process
     begin
         report "Stimulus process started" severity note;
+
+        -- Enable counting
+        s_en     <= '1';
         
-        s_hex <= "0000"; wait for 100 ns; --0
-        
-        s_hex <= "0001"; wait for 100 ns; --1
-        
-        s_hex <= "0010"; wait for 100 ns; --2
-        
-        s_hex <= "0011"; wait for 100 ns; --3
-        
-        s_hex <= "0100"; wait for 100 ns; --4
-        
-        s_hex <= "0101"; wait for 100 ns; --5
-        
-        s_hex <= "0110"; wait for 100 ns; --6
-        
-        s_hex <= "0111"; wait for 100 ns; --7
-        
-        s_hex <= "1000"; wait for 100 ns; --8
-        
-        s_hex <= "1001"; wait for 100 ns; --9
-        
-        s_hex <= "1010"; wait for 100 ns; --A
-        
-        s_hex <= "1011"; wait for 100 ns; --b
-        
-        s_hex <= "1100"; wait for 100 ns; --C
-        
-        s_hex <= "1101"; wait for 100 ns; --d
-        
-        s_hex <= "1110"; wait for 100 ns; --E
-        
-        s_hex <= "1111"; wait for 100 ns; --F
-        
-           
+        -- Change counter direction
+        s_cnt_up <= '1';
+        wait for 420 ns;
+        s_cnt_up <= '0';
+        wait for 210 ns;
+
+        -- Disable counting
+        s_en     <= '0';
+
         report "Stimulus process finished" severity note;
+        wait;
     end process p_stimulus;
 
-end Behavioral;
+end architecture testbench;
 
 ```
+
+**Analysis**
+![Analysis]("images/05_analysis")
+![Analysis]("images/05_analysis_blizko")
 
 ## Part 3 - top
 
