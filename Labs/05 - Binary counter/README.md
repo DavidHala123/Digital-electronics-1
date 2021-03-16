@@ -125,8 +125,8 @@ end architecture testbench;
 ```
 
 **Analysis**
-![Analysis]("images/05_analysis")
-![Analysis]("images/05_analysis_blizko")
+![Analysis]("images/05_analysis.PNG")
+![Analysis]("images/05_analysis_blizko.PNG")
 
 ## Part 3 - top
 
