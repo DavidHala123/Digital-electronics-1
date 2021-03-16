@@ -1,9 +1,10 @@
 # Part 1 - Preparation
 
-##Scheme
+**Scheme**
+
 ![schema](images/schema_1.png)
 
-##Table with values
+**Table with values**
 
    | **Time interval** | **Number of clk periods** | **Number of clk periods in hex** | **Number of clk periods in binary** |
    | :-: | :-: | :-: | :-: |
