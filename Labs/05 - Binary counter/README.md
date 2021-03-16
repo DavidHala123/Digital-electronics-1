@@ -144,28 +144,63 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity top is
     Port ( 
-           SW : in STD_LOGIC_VECTOR (4-1 downto 0);     --input binary data
-           CA : out std_logic;                          --Catody
-           CB : out std_logic;
-           CC : out std_logic;
-           CD : out std_logic;
-           CE : out std_logic;
-           CF : out std_logic;
-           CG : out std_logic;
-           
-           LED : out std_logic_vector(8-1 downto 0); -- LED indicator
-           AN  : out std_logic_vector (8-1 downto 0) -- 
-           );
+           CLK100MHZ : in STD_LOGIC;
+           BTNC : in STD_LOGIC;
+           SW : in STD_LOGIC_VECTOR (1-1 downto 0);
+           LED : out STD_LOGIC_VECTOR (4-1 downto 0);
+           CA : out STD_LOGIC;
+           CB : out STD_LOGIC;
+           CC : out STD_LOGIC;
+           CD : out STD_LOGIC;
+           CE : out STD_LOGIC;
+           CF : out STD_LOGIC;
+           CG : out STD_LOGIC;
+           AN : out STD_LOGIC_VECTOR (8-1 downto 0));
 end top;
+
 
 architecture Behavioral of top is
 
+    -- Internal clock enable
+    signal s_en  : std_logic;
+    -- Internal counter
+    signal s_cnt : std_logic_vector(4 - 1 downto 0);
+
 begin
+
+    clk_en0 : entity work.clock_enable
+        generic map(
+            --- WRITE YOUR CODE HERE
+            g_MAX => 10000000
+        )
+        port map(
+            --- WRITE YOUR CODE HERE
+            clk   => CLK100MHZ,
+            reset => BTNC,
+            ce_o  => s_en
+            
+        );
+
+    bin_cnt0 : entity work.cnt_up_down
+        generic map(
+            --- WRITE YOUR CODE HERE
+            g_CNT_WIDTH => 4
+        )
+        port map(
+            --- WRITE YOUR CODE HERE
+            clk      => CLK100MHZ,
+            reset    => BTNC,
+            en_i     => s_en,
+            cnt_up_i => SW(0),
+            cnt_o    => s_cnt
+        );
+
+    -- Display input value on LEDs
+    LED(3 downto 0) <= s_cnt;
 
     hex2seg : entity work.hex_7seg
         port map(
-            hex_i => SW,
-            
+            hex_i    => s_cnt,
             seg_o(6) => CA,
             seg_o(5) => CB,
             seg_o(4) => CC,
@@ -175,114 +210,9 @@ begin
             seg_o(0) => CG
         );
 
-        AN <= b"1111_0111";
-        
-         -- Display input value
-    LED(3 downto 0) <= SW;
+    AN <= b"1111_1110";
 
-    -- Turn LED(4) on if input value is equal to 0, ie "0000"
-    -- WRITE YOUR CODE HERE
-     LED(4)  <= '1' when (SW = "0000") else '0';
-  
-    -- Turn LED(5) on if input value is greater than "1001"
-    -- WRITE YOUR CODE HERE
-     LED(5)  <= '1' when (SW > "1001") else '0';
-    
-    -- Turn LED(6) on if input value is odd, ie 1, 3, 5, ...
-    -- WRITE YOUR CODE HERE
-    LED(6) <= '1' when (SW = "0001" or SW = "0011" or SW = "0101" or SW = "0111" or 
-    SW = "1001" or SW = "1011" or SW = "1101" or SW = "1111") else '0';
-    
-    -- Turn LED(7) on if input value is a power of two, ie 1, 2, 4, or 8
-    -- WRITE YOUR CODE HERE
-    LED(7)  <= '1' when (SW = "0001" or SW = "0010" or SW = "0100" or SW = "1000") else '0';
+end architecture Behavioral;
 
-end Behavioral;
-
-```
-
-**tb_top.vhdl**
-
-```vhdl
-
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-
-entity tb_top is
-
-end tb_top;
-
-architecture Behavioral of tb_top is
-
-    signal s_SW : STD_LOGIC_VECTOR (4 - 1 downto 0); -- Input binary data
-    signal s_CA : STD_LOGIC; -- 	Cathod A
-    signal s_CB : STD_LOGIC; -- 	Cathod B
-    signal s_CC : STD_LOGIC; -- 	Cathod C
-    signal s_CD : STD_LOGIC; -- 	Cathod D
-    signal s_CE : STD_LOGIC; -- 	Cathod E
-    signal s_CF : STD_LOGIC; -- 	Cathod F
-    signal s_CG : STD_LOGIC; -- 	Cathod G
-        
-    signal s_LED : STD_LOGIC_VECTOR (8 - 1 downto 0); -- LED indicators
-    signal s_AN  : STD_LOGIC_VECTOR (8 - 1 downto 0); -- Common anode signals to individual displays
-
-begin
-
-    uut_top : entity work.top
-        port map(
-            SW           => s_SW,
-            CA           => s_CA,
-            CB           => s_CB,
-            CC           => s_CC,
-            CD           => s_CD,
-            CE           => s_CE,
-            CF           => s_CF,
-            CG           => s_CG,
-            LED          => s_LED,
-            AN           => s_AN
-        );
-
-p_stimulus : process
-    begin
-
-        report "Stimulus process started" severity note;
-
-        s_SW <= "0000"; wait for 100 ns;
-        
-        s_SW <= "0001"; wait for 100 ns;
-        
-        s_SW <= "0010"; wait for 100 ns;
-        
-        s_SW <= "0011"; wait for 100 ns;
-        
-        s_SW <= "0100"; wait for 100 ns;
-       
-        s_SW <= "0101"; wait for 100 ns;
-        
-        s_SW <= "0110"; wait for 100 ns;
-        
-        s_SW <= "0111"; wait for 100 ns;
-        
-        s_SW <= "1000"; wait for 100 ns;
-        
-        s_SW <= "1001"; wait for 100 ns;
-        
-        s_SW <= "1010"; wait for 100 ns;
-        
-        s_SW <= "1011"; wait for 100 ns;
-        
-        s_SW <= "1100"; wait for 100 ns;
-        
-        s_SW <= "1101"; wait for 100 ns;
-        
-        s_SW <= "1110"; wait for 100 ns;
-        
-        s_SW <= "1111"; wait for 100 ns;
-
-        report "Stimulus process finished" severity note;
-        wait;
-    end process p_stimulus;
-
-end Behavioral;
 
 ```
