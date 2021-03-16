@@ -215,4 +215,11 @@ begin
 end architecture Behavioral;
 
 
+
 ```
+
+Count up down 4-bit
+![cnt4](images/clk_up_down.png)
+
+Count up down 16-bit
+![cnt16](images/clk_up_down16.png)
