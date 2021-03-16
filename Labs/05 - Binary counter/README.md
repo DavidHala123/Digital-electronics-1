@@ -1,6 +1,9 @@
 ## Part 1 - Preparation
 
+**Scheme**
 ![schema](images/schema_1.png)
+
+**Table with values**
 
    | **Time interval** | **Number of clk periods** | **Number of clk periods in hex** | **Number of clk periods in binary** |
    | :-: | :-: | :-: | :-: |
@@ -12,8 +15,6 @@
    | 1&nbsp;sec | 100 000 000 | `x"5F5_E100"` | `b"0101_1111_0101_1110_0001_0000_0000"` |
 
 ## Part 2 - Bidirectional counter
-
-
 
 **p_cnt_up_down**
 
@@ -134,7 +135,6 @@ end architecture testbench;
 
 ## Part 3 - top
 
-
 **top.vhdl**
 
 ```vhdl
@@ -219,8 +219,8 @@ end architecture Behavioral;
 
 ```
 
-Counter 4-bit
+**Counter 4-bit**
 ![cnt4](images/clk_up_down.png)
 
-Counter 16-bit
+**Counter 16-bit**
 ![cnt16](images/clk_up_down16.png)
