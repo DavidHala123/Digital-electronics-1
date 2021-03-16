@@ -1,5 +1,6 @@
 ## Part 1 - Preparation
 
+![schema](images/schema_1.png)
 
    | **Time interval** | **Number of clk periods** | **Number of clk periods in hex** | **Number of clk periods in binary** |
    | :-: | :-: | :-: | :-: |
