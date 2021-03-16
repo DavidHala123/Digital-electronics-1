@@ -1,4 +1,4 @@
-## Preparation
+## Part 1 - Preparation
 
 
    | **Time interval** | **Number of clk periods** | **Number of clk periods in hex** | **Number of clk periods in binary** |
