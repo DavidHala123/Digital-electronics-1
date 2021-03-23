@@ -1,5 +1,6 @@
 ## Preparation
 
+![Graph](images/graph.png)
 
 ## Part 2 - Display driver
 
