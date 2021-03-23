@@ -1,170 +1,137 @@
 ## Preparation
 
-| **Hex** | **Inputs** | **A** | **B** | **C** | **D** | **E** | **F** | **G** |
-| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-| 0 | 0000 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
-| 1 | 0001 | 1 | 0 | 0 | 1 | 1 | 1 | 1 |
-| 2 | 0010 | 0 | 0 | 1 | 0 | 0 | 1 | 0 |
-| 3 | 0011 | 0 | 0 | 0 | 0 | 1 | 1 | 0 |
-| 4 | 0100 | 1 | 0 | 0 | 1 | 1 | 0 | 0 |
-| 5 | 0101 | 0 | 1 | 0 | 0 | 1 | 0 | 0 |
-| 6 | 0110 | 0 | 1 | 0 | 0 | 0 | 0 | 0 |
-| 7 | 0111 | 0 | 0 | 0 | 1 | 1 | 1 | 1 |
-| 8 | 1000 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| 9 | 1001 | 0 | 0 | 0 | 0 | 0 | 1 | 0 |
-| A | 1010 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
-| b | 1011 | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
-| C | 1100 | 0 | 1 | 1 | 0 | 0 | 0 | 1 |
-| d | 1101 | 1 | 0 | 0 | 0 | 0 | 1 | 0 |
-| E | 1110 | 0 | 1 | 1 | 0 | 0 | 0 | 0 |
-| F | 1111 | 0 | 1 | 1 | 1 | 0 | 0 | 0 |
 
-## Part 2 - seg7
+## Part 2 - Display driver
 
-
-
-**hex_7seg.vhdl**
+**p_mux**
 
 ```vhdl
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-
-entity hex_7seg is
-   Port ( 
-        hex_i : in STD_LOGIC_VECTOR (4-1 downto 0);
-        seg_o : out STD_LOGIC_VECTOR (7-1 downto 0)
-         );
-end hex_7seg;
-
-architecture Behavioral of hex_7seg is
-
-begin
-
-    p_7seg_decoder : process(hex_i)
+    p_mux : process(s_cnt, data0_i, data1_i, data2_i, data3_i, dp_i)
     begin
-        case hex_i is
-            when "0000" =>
-                seg_o <= "0000001";     -- 0
-            
-            when "0001" =>
-                seg_o <= "1001111";     -- 1
-            
-            when "0010" =>
-                seg_o <= "0010010";     -- 2
-            
-            when "0011" =>
-                seg_o <= "0000110";     -- 3
-            
-            when "0100" =>
-                seg_o <= "1001100";     -- 4
-            
-            when "0101" =>
-                seg_o <= "0100100";     -- 5
-            
-            when "0110" =>
-                seg_o <= "0100000";     -- 6
-            
-            when "0111" =>
-                seg_o <= "0001111";     -- 7
-            
-            when "1000" =>
-                seg_o <= "0000000";     -- 8
-            
-            when "1001" =>
-                seg_o <= "0000010";     -- 9
-            
-            when "1010" =>
-                seg_o <= "0001000";     -- A
-            
-            when "1011" =>
-                seg_o <= "1100000";     -- b
-            
-            when "1100" =>
-                seg_o <= "0110001";     -- C
-            
-            when "1101" =>
-                seg_o <= "1000010";     -- d    
-            
-            when "1110" =>
-                seg_o <= "0110000";     -- E
-            
+        case s_cnt is
+            when "11" =>
+                s_hex <= data3_i;
+                dp_o  <= dp_i(3);
+                dig_o <= "0111";
+
+            when "10" =>
+                -- WRITE YOUR CODE HERE
+                s_hex <= data2_i;
+                dp_o  <= dp_i(2);
+                dig_o <= "1011";
+            when "01" =>
+                -- WRITE YOUR CODE HERE
+                s_hex <= data1_i;
+                dp_o  <= dp_i(1);
+                dig_o <= "1101";
+
             when others =>
-                seg_o <= "0111000";     -- F
+                -- WRITE YOUR CODE HERE
+                s_hex <= data0_i;
+                dp_o  <= dp_i(0);
+                dig_o <= "1110";
         end case;
-    end process p_7seg_decoder;
+    end process p_mux;
 
-
-end Behavioral;
-
+end architecture Behavioral;
 ```
 
-**tb_hex_7seg**
+**tb_driver_7seg_4digits.vhdl**
 
 ```vhdl
+library ieee;
+use ieee.std_logic_1164.all;
 
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
+entity tb_driver_7seg_4digits is
+    -- Entity of testbench is always empty
+end entity tb_driver_7seg_4digits;
 
+architecture testbench of tb_driver_7seg_4digits is
 
-entity tb_hex_7seg is
---  Port ( );
-end tb_hex_7seg;
+    -- Local constants
+    constant c_CLK_100MHZ_PERIOD : time    := 10 ns;
 
-architecture Behavioral of tb_hex_7seg is
-
-    signal s_hex : STD_LOGIC_VECTOR (4-1 downto 0);
-    signal s_seg : STD_LOGIC_VECTOR (7-1 downto 0);
-
+    --Local signals
+    signal s_clk_100MHz : std_logic;
+    --- WRITE YOUR CODE HERE
+    signal s_reset : std_logic;
+    
+    signal s_data0 : std_logic_vector(4-1 downto 0);
+    signal s_data1 : std_logic_vector(4-1 downto 0);
+    signal s_data2 : std_logic_vector(4-1 downto 0);
+    signal s_data3 : std_logic_vector(4-1 downto 0);
+    
+    signal s_dp_i : std_logic_vector(4-1 downto 0);
+    signal s_dp_o : std_logic;
+    signal s_seg : std_logic_vector(7-1 downto 0);
+    
+    signal s_dig : std_logic_vector(4-1 downto 0);
+    
 
 begin
-    uut_hex_7seg  : entity work.hex_7seg
-        port map (
-        
-        hex_i => s_hex,
-        seg_o => s_seg
+    -- Connecting testbench signals with driver_7seg_4digits entity
+    -- (Unit Under Test)
+    --- WRITE YOUR CODE HERE
+    uut_driver_7seg_4digits : entity work.driver_7seg_4digits
+    port map(
+            clk => s_clk_100MHz,
+            reset => s_reset,
+                      
+            data0_i => s_data0,
+            data1_i => s_data1,
+            data2_i => s_data2,
+            data3_i => s_data3,
+            
+            dp_i => s_dp_i,
+                    
+            dp_o  => s_dp_o,
+            seg_o => s_seg, 
+            dig_o => s_dig 
         );
+
+    p_clk_gen : process
+    begin
+        while now < 750 ns loop         -- 75 periods of 100MHz clock
+            s_clk_100MHz <= '0';
+            wait for c_CLK_100MHZ_PERIOD / 2;
+            s_clk_100MHz <= '1';
+            wait for c_CLK_100MHZ_PERIOD / 2;
+        end loop;
+        wait;
+    end process p_clk_gen;
+
+    
+    p_reset_gen : process
+    begin
+        s_reset <= '0';
+        wait for 28 ns;
+        
+        -- Reset activated
+        s_reset <= '1';
+        wait for 53 ns;
+       
+        s_reset <= '0';
+        wait;
+    end process p_reset_gen;
+
 
     p_stimulus : process
     begin
         report "Stimulus process started" severity note;
         
-        s_hex <= "0000"; wait for 100 ns; --0
+        s_data3 <= "0011";
+        s_data2 <= "0001";
+        s_data1 <= "0100";
+        s_data0 <= "0010";
+       
+        s_dp_i <= "0111";
         
-        s_hex <= "0001"; wait for 100 ns; --1
+       report "Stimulus process finished" severity note;  
+       wait;
+      end process p_stimulus; 
         
-        s_hex <= "0010"; wait for 100 ns; --2
-        
-        s_hex <= "0011"; wait for 100 ns; --3
-        
-        s_hex <= "0100"; wait for 100 ns; --4
-        
-        s_hex <= "0101"; wait for 100 ns; --5
-        
-        s_hex <= "0110"; wait for 100 ns; --6
-        
-        s_hex <= "0111"; wait for 100 ns; --7
-        
-        s_hex <= "1000"; wait for 100 ns; --8
-        
-        s_hex <= "1001"; wait for 100 ns; --9
-        
-        s_hex <= "1010"; wait for 100 ns; --A
-        
-        s_hex <= "1011"; wait for 100 ns; --b
-        
-        s_hex <= "1100"; wait for 100 ns; --C
-        
-        s_hex <= "1101"; wait for 100 ns; --d
-        
-        s_hex <= "1110"; wait for 100 ns; --E
-        
-        s_hex <= "1111"; wait for 100 ns; --F
-        
-           
-        report "Stimulus process finished" severity note;
-    end process p_stimulus;
 
-end Behavioral;
+end architecture testbench;
 
 ```
 
@@ -174,34 +141,43 @@ end Behavioral;
 **top.vhdl**
 
 ```vhdl
-
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-
-
-entity top is
-    Port ( 
-           SW : in STD_LOGIC_VECTOR (4-1 downto 0);     --input binary data
-           CA : out std_logic;                          --Catody
-           CB : out std_logic;
-           CC : out std_logic;
-           CD : out std_logic;
-           CE : out std_logic;
-           CF : out std_logic;
-           CG : out std_logic;
-           
-           LED : out std_logic_vector(8-1 downto 0); -- LED indicator
-           AN  : out std_logic_vector (8-1 downto 0) -- 
-           );
-end top;
-
+------------------------------------------------------------------------
+-- Architecture body for top level
+------------------------------------------------------------------------
 architecture Behavioral of top is
-
+    -- No internal signals
 begin
 
-    hex2seg : entity work.hex_7seg
+    --------------------------------------------------------------------
+    -- Instance (copy) of driver_7seg_4digits entity
+    driver_seg_4 : entity work.driver_7seg_4digits
         port map(
-            hex_i => SW,
+            clk        => CLK100MHZ,
+            reset      => BTNC,
+            data0_i(3) => SW(3),
+            data0_i(2) => SW(2),
+            data0_i(1) => SW(1),
+            data0_i(0) => SW(0),
+            --- WRITE YOUR CODE HERE
+            
+            data1_i(3) => SW(7),
+            data1_i(2) => SW(6),
+            data1_i(1) => SW(5),
+            data1_i(0) => SW(4),
+            
+            data2_i(3) => SW(11),
+            data2_i(2) => SW(10),
+            data2_i(1) => SW(9),
+            data2_i(0) => SW(8),
+            
+            data3_i(3) => SW(15),
+            data3_i(2) => SW(14),
+            data3_i(1) => SW(13),
+            data3_i(0) => SW(12),
+            
+            
+            dp_i => "0111",
+            dp_o => DP,
             
             seg_o(6) => CA,
             seg_o(5) => CB,
@@ -209,116 +185,19 @@ begin
             seg_o(3) => CD,
             seg_o(2) => CE,
             seg_o(1) => CF,
-            seg_o(0) => CG
+            seg_o(0) => CG,
+
+            dig_o => AN (4-1 downto 0)
+            
+            --- WRITE YOUR CODE HERE
+            
         );
 
-        AN <= b"1111_0111";
-        
-         -- Display input value
-    LED(3 downto 0) <= SW;
+    -- Disconnect the top four digits of the 7-segment display
+    AN(7 downto 4) <= b"1111";
 
-    -- Turn LED(4) on if input value is equal to 0, ie "0000"
-    -- WRITE YOUR CODE HERE
-     LED(4)  <= '1' when (SW = "0000") else '0';
-  
-    -- Turn LED(5) on if input value is greater than "1001"
-    -- WRITE YOUR CODE HERE
-     LED(5)  <= '1' when (SW > "1001") else '0';
-    
-    -- Turn LED(6) on if input value is odd, ie 1, 3, 5, ...
-    -- WRITE YOUR CODE HERE
-    LED(6) <= '1' when (SW = "0001" or SW = "0011" or SW = "0101" or SW = "0111" or SW = "1001" or SW = "1011" or SW = "1101" or SW = "1111") else '0';
-    
-    -- Turn LED(7) on if input value is a power of two, ie 1, 2, 4, or 8
-    -- WRITE YOUR CODE HERE
-    LED(7)  <= '1' when (SW = "0001" or SW = "0010" or SW = "0100" or SW = "1000") else '0';
-
-end Behavioral;
+end architecture Behavioral;
 
 ```
 
-**tb_top.vhdl**
-
-```vhdl
-
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-
-entity tb_top is
-
-end tb_top;
-
-architecture Behavioral of tb_top is
-
-    signal s_SW : STD_LOGIC_VECTOR (4 - 1 downto 0); -- Input binary data
-    signal s_CA : STD_LOGIC; -- 	Cathod A
-    signal s_CB : STD_LOGIC; -- 	Cathod B
-    signal s_CC : STD_LOGIC; -- 	Cathod C
-    signal s_CD : STD_LOGIC; -- 	Cathod D
-    signal s_CE : STD_LOGIC; -- 	Cathod E
-    signal s_CF : STD_LOGIC; -- 	Cathod F
-    signal s_CG : STD_LOGIC; -- 	Cathod G
-        
-    signal s_LED : STD_LOGIC_VECTOR (8 - 1 downto 0); -- LED indicators
-    signal s_AN  : STD_LOGIC_VECTOR (8 - 1 downto 0); -- Common anode signals to individual displays
-
-begin
-
-    uut_top : entity work.top
-        port map(
-            SW           => s_SW,
-            CA           => s_CA,
-            CB           => s_CB,
-            CC           => s_CC,
-            CD           => s_CD,
-            CE           => s_CE,
-            CF           => s_CF,
-            CG           => s_CG,
-            LED          => s_LED,
-            AN           => s_AN
-        );
-
-p_stimulus : process
-    begin
-
-        report "Stimulus process started" severity note;
-
-        s_SW <= "0000"; wait for 100 ns;
-        
-        s_SW <= "0001"; wait for 100 ns;
-        
-        s_SW <= "0010"; wait for 100 ns;
-        
-        s_SW <= "0011"; wait for 100 ns;
-        
-        s_SW <= "0100"; wait for 100 ns;
-       
-        s_SW <= "0101"; wait for 100 ns;
-        
-        s_SW <= "0110"; wait for 100 ns;
-        
-        s_SW <= "0111"; wait for 100 ns;
-        
-        s_SW <= "1000"; wait for 100 ns;
-        
-        s_SW <= "1001"; wait for 100 ns;
-        
-        s_SW <= "1010"; wait for 100 ns;
-        
-        s_SW <= "1011"; wait for 100 ns;
-        
-        s_SW <= "1100"; wait for 100 ns;
-        
-        s_SW <= "1101"; wait for 100 ns;
-        
-        s_SW <= "1110"; wait for 100 ns;
-        
-        s_SW <= "1111"; wait for 100 ns;
-
-        report "Stimulus process finished" severity note;
-        wait;
-    end process p_stimulus;
-
-end Behavioral;
-
-```
+## Part 4 - 8 digit driver
