@@ -137,7 +137,7 @@ end architecture testbench;
 
 **Simulation**
 
-![Simulation]("images/sim.PNG")
+![Simulation](images/sim.PNG)
 
 ## Part 3 - top
 
