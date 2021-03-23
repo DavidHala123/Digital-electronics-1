@@ -206,3 +206,5 @@ end architecture Behavioral;
 ```
 
 ## Part 4 - 8 digit driver
+
+![Zapojeni](images/zapojeni.png )
