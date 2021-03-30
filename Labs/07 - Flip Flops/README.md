@@ -1,7 +1,4 @@
 ## 1.Preparation
-
-
-![Characteristic equations](Images/eq_flip_flops.png)
 <!--
 \begin{align*}
     q_{n+1}^D =&~ \\
