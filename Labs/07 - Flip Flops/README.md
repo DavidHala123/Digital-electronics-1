@@ -1,10 +1,5 @@
 ## 1.Preparation
-<!--
-\begin{align*}
-    q_{n+1}^D =&~ \\
-    q_{n+1}^{JK} =&\\
-    q_{n+1}^T =&\\
-\end{align*}-->
+
 
    | **clk** | **d** | **q(n)** | **q(n+1)** | **Comments** |
    | :-: | :-: | :-: | :-: | :-- |
@@ -30,9 +25,6 @@
    | ![rising](Images/eq_uparrow.png) | 0 | 1 | 1 | No change |
    | ![rising](Images/eq_uparrow.png) | 1 | 0 | 1 | Invert (Toggle) |
    | ![rising](Images/eq_uparrow.png) | 1 | 1 | 0 | Invert (Toggle) |
-
-
-<!--
 
 
 ## 2.D latch
