@@ -530,5 +530,5 @@ end Behavioral;
 
 ## 4. Image
 
-![image](obrazek.png)
+![image](Images/obrazek.png)
 
