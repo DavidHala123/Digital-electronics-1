@@ -209,6 +209,8 @@ p_reset_gen : process
 
 end Behavioral;
 ```
+
+**Simulation tb_d_latch**
 ![Sim(tb_d_latch)](Images/Sim(tb_d_latch).PNG)
 
 ## 3.Flip Flops
@@ -429,7 +431,7 @@ begin
 end Behavioral;
 ```
 **Simulation tb_d_ff_arst**
-![Sim(tb_d_ff_ars)](Images/Sim(tb_d_ff_arst).PNG))
+![Sim(tb_d_ff_ars)](Images/Sim(tb_d_ff_arst).PNG)
 **Simulation tb_ik_ff_rst**
 ![Sim(tb_ik_ff_rst)](Images/Sim(tb_ik_ff_rst).PNG)
 **Simulation tb_jk_ff_rst**
