@@ -38,224 +38,406 @@
 <!--
 
 
-**f(B<A) = (b1+b1+a1+a1) . (b1+!b0+a1+a1) . (b1+!b0+a1+!a0) . (!b1+b0+a1+a0) . (!b1+b0+a1+!a0) . (!b1+b0+!a1+a0) . (!b1+!b0+a1+a0) . (!b1+!b0+a1+!a0) . (!b1+!b0+!a1+a0) . (!b1+!b0+!a1+!a0)**
+## 2.D latch
 
-
-## K-maps
-
-![Karnaugh](images/excel_karnaugh3.png)
-
-**B>A:**
-
-SOP --> f(b>a) = (b1.!a1) + (b1.!a0) + (b0.!a1.!a0)
-
-POS --> f(b>a) = (b1+!a1) . (b1+!a0) . (b0+!a1+!a0)
-
-
-
-**B=A:**
-
-POS --> f(B=A) = (!b1.!b0.!a1.!a0) + (!b1.b0.!a1.a0) + (b1.b0.a1.a0) + (b1.!b0.a1.!a0)
-
-SOP --> f(B=A) = (!b1+!b0+!a1+!a0) . (!b1+b0+!a1+a0) . (b1+b0+a1+a0) . (b1+!b0+a1+!a0)
-
-
-
-**B<A:**
-
-POS --> f(B<A) = (b0.!a1) + (b1.b0) + (b1.!a1) + (!a1.!a0)
-
-SOP --> f(B<A) = (b0+!a0) . (b1+b0) . (b1+!a0) . (!a1+!a0)
-
-## Code
-
-**design.vhdl**
+**p_d_latch.vhdl**
 
 ```vhdl
 library IEEE;
-use IEEE.std_logic_1164.all;
+use IEEE.STD_LOGIC_1164.ALL;
 
+entity d_latch is
+  Port ( 
+         en     : in std_logic;
+         arst   : in std_logic;
+         d      : in std_logic;
+         q      : out std_logic;
+         q_bar  : out std_logic
+  
+  );
+end d_latch;
 
-entity comparator_4bit is
-    port(
-        a_i           : in  std_logic_vector(4 - 1 downto 0);
-        b_i           : in  std_logic_vector(4 - 1 downto 0);
+architecture Behavioral of d_latch is
 
-        
-
-        B_greater_A_o : out std_logic;
-        B_equals_A_o  : out std_logic;
-        B_less_A_o    : out std_logic      
-    );
-end entity comparator_4bit;
-
-
-architecture Behavioral of comparator_4bit is
 begin
 
-    B_greater_A_o  <= '1' when (b_i > a_i) else '0';
-    B_equals_A_o   <= '1' when (b_i = a_i) else '0';
-    B_less_A_o     <= '1' when (b_i < a_i) else '0';
+    p_d_latch : process (d, arst, en)
+    begin
+        if (arst = '1') then
+            q <= '0';
+            q_bar <= '1';
+       
+        elsif (en = '1') then
+            q <= d;
+            q_bar <= not d;   
+        
+        end if; 
+          
+    end process p_d_latch;  
+     
+end Behavioral;
 
-
-end architecture Behavioral;
 
 ```
 
-**testbench.vhdl**
+**tb_d_latch.vhdl**
 
 ```vhdl
+
 library IEEE;
-use IEEE.std_logic_1164.all;
+use IEEE.STD_LOGIC_1164.ALL;
 
+entity tb_d_latch is
+ -- Port (  );
+end tb_d_latch;
 
-entity tb_comparator_4bit is
-
-end entity tb_comparator_4bit;
-
-
-architecture testbench of tb_comparator_4bit is
-
-    signal s_a       : std_logic_vector(4 - 1 downto 0);
-    signal s_b       : std_logic_vector(4 - 1 downto 0);
-    signal s_B_greater_A : std_logic;
-    signal s_B_equals_A  : std_logic;
-    signal s_B_less_A    : std_logic;
+architecture Behavioral of tb_d_latch is
+        signal s_en     :  std_logic;
+        signal s_arst   :  std_logic;
+        signal s_d      :  std_logic;
+        signal s_q      :  std_logic;
+        signal s_q_bar  :  std_logic;
 
 begin
-
-    uut_comparator_4bit : entity work.comparator_4bit
-        port map(
-            a_i           => s_a,
-            b_i           => s_b,
-            B_greater_A_o => s_B_greater_A,
-            B_equals_A_o  => s_B_equals_A,
-            B_less_A_o    => s_B_less_A
-        );
-
-   
+uut_d_latch: entity work.d_latch
+    port map(
+        en    => s_en,   
+        arst  => s_arst, 
+        d     => s_d,    
+        q     => s_q,    
+        q_bar => s_q_bar
+);
+p_reset_gen : process
+    begin
+        s_arst <= '0';
+        wait for 12 ns;
+        
+        -- Reset activated
+        s_arst <= '1';
+        wait for 80 ns;
+       
+        
+        s_arst <= '0';
+        wait for 150 ns;
+        
+        -- Reset activated
+        s_arst <= '1';
+        wait for 60 ns;
+       
+        s_arst <= '0';
+        wait;
+    end process p_reset_gen;
+    
     p_stimulus : process
     begin
-        
         report "Stimulus process started" severity note;
+            s_d <= '0';
+            s_en <= '0';
+            
+            
+            assert (s_q = '0')
+            report "nesouhlasí" severity error;
+            
+            
+            wait for 10ns;
+            s_d <= '1';
+            wait for 10ns;
+            s_d <= '0';
+            wait for 10ns;
+            s_d <= '1';
+            wait for 10ns;
+            s_d <= '0';
+            wait for 10ns;
+            s_d <= '1';
+            wait for 10ns;
+            s_d <= '0';
+            
+            assert (s_q = '0' and s_q_bar = '1')
+            report "nesouhlasí" severity error;
+            
+            
+            s_en <= '1';
 
-
-
-        s_b <= "0000"; s_a <= "0000"; 
-        wait for 100 ns;
-        assert ((s_B_greater_A = '0') and (s_B_equals_A = '1') and (s_B_less_A = '0'))
-        report "Chyba pro kombinaci: 0000, 0000" severity error;
-        
-        s_b <= "0100"; s_a <= "0001"; 
-        wait for 100 ns;
-        assert ((s_B_greater_A = '1') and (s_B_equals_A = '1') and (s_B_less_A = '0'))
-        report "Chyba pro vstupní hodnoty: 0100, 0001" severity error;
-       
-        s_b <= "0100"; s_a <= "0010"; 
-        wait for 100 ns;
-        assert ((s_B_greater_A = '1') and (s_B_equals_A = '0') and (s_B_less_A = '0'))
-        report "Chyba pro vstupní hodnoty: 0100, 0010" severity error;
-        
-        s_b <= "0100"; s_a <= "0011"; 
-        wait for 100 ns;
-        assert ((s_B_greater_A = '1') and (s_B_equals_A = '0') and (s_B_less_A = '1'))
-        report "Chyba pro vstupní hodnoty: 0100, 0011" severity error;
-
-		s_b <= "0101"; s_a <= "0100"; 
-        wait for 100 ns;
-        assert ((s_B_greater_A = '0') and (s_B_equals_A = '0') and (s_B_less_A = '0'))
-        report "Chyba pro vstupní hodnoty: 0101, 0100" severity error;
-        
-        s_b <= "0101"; s_a <= "0101"; 
-        wait for 100 ns;
-        assert ((s_B_greater_A = '0') and (s_B_equals_A = '1') and (s_B_less_A = '0'))
-        report "Chyba pro vstupní hodnoty: 0101, 0101" severity error;
-        
-        s_b <= "0101"; s_a <= "0110"; 
-        wait for 100 ns;
-        assert ((s_B_greater_A = '0') and (s_B_equals_A = '0') and (s_B_less_A = '1'))
-        report "Chyba pro vstupní hodnoty: 0101, 0110" severity error;
-        
-        s_b <= "0101"; s_a <= "0111"; 
-        wait for 100 ns;
-        assert ((s_B_greater_A = '0') and (s_B_equals_A = '0') and (s_B_less_A = '1'))
-        report "Chyba pro vstupní hodnoty: 0101, 0111" severity error;
-        
-        s_b <= "1110"; s_a <= "0100"; 
-        wait for 100 ns;
-        assert ((s_B_greater_A = '1') and (s_B_equals_A = '0') and (s_B_less_A = '0'))
-        report "Chyba pro vstupní hodnoty: 1110, 0100" severity error;
-        
-        s_b <= "1110"; s_a <= "0101"; 
-        wait for 100 ns;
-        assert ((s_B_greater_A = '1') and (s_B_equals_A = '0') and (s_B_less_A = '0'))
-        report "Chyba pro vstupní hodnoty: 1110, 0101" severity error;
-        
-        s_b <= "1110"; s_a <= "0110"; 
-        wait for 100 ns;
-        assert ((s_B_greater_A = '1') and (s_B_equals_A = '0') and (s_B_less_A = '0'))
-        report "Chyba pro vstupní hodnoty: 1110, 0110" severity error;
-        
-         s_b <= "1110"; s_a <= "0111"; 
-        wait for 100 ns;
-        assert ((s_B_greater_A = '1') and (s_B_equals_A = '0') and (s_B_less_A = '0'))
-        report "Chyba pro vstupní hodnoty: 1110, 0111" severity error;
-        
-        s_b <= "1111"; s_a <= "0100"; 
-        wait for 100 ns;
-        assert ((s_B_greater_A = '1') and (s_B_equals_A = '0') and (s_B_less_A = '0'))
-        report "Chyba pro vstupní hodnoty: 1111, 0100" severity error;
-        
-        s_b <= "1111"; s_a <= "1101"; 
-        wait for 100 ns;
-        assert ((s_B_greater_A = '1') and (s_B_equals_A = '0') and (s_B_less_A = '0'))
-        report "Chyba pro vstupní hodnoty: 1111, 1101" severity error;
-        
-        s_b <= "1111"; s_a <= "1110"; 
-        wait for 100 ns;
-        assert ((s_B_greater_A = '1') and (s_B_equals_A = '0') and (s_B_less_A = '0'))
-        report "Chyba pro vstupní hodnoty: 1111, 1110" severity error;
-        
-        s_b <= "1111"; s_a <= "1111"; 
-        wait for 100 ns;
-        assert ((s_B_greater_A = '0') and (s_B_equals_A = '1') and (s_B_less_A = '0'))
-        report "Chyba pro vstupní hodnoty: 1111, 1111" severity error;
-
-
-        
-        
-       
-        report "Stimulus process finished" severity note;
+            wait for 10ns;
+            s_d <= '1';
+            wait for 10ns;
+            s_d <= '0';
+            wait for 10ns;
+            s_d <= '1';
+            wait for 10ns;
+            s_d <= '0';
+            wait for 10ns;
+            s_d <= '1';
+            wait for 10ns;
+            s_d <= '0';
+            
+            s_en <= '0';
+            
+            
+            wait for 10ns;
+            s_d <= '1';
+            wait for 10ns;
+            s_d <= '0';
+            wait for 10ns;
+            s_d <= '1';
+            wait for 10ns;
+            s_d <= '0';
+            wait for 10ns;
+            s_d <= '1';
+            wait for 10ns;
+            s_d <= '0';    
+            
+            s_en <= '1';
+            
+            wait for 10ns;
+            s_d <= '1';
+            wait for 10ns;
+            s_d <= '0';
+            wait for 10ns;
+            s_d <= '1';
+            wait for 10ns;
+            s_d <= '0';
+            wait for 10ns;
+            s_d <= '1';
+            wait for 10ns;
+            s_d <= '0'; 
+            wait for 10ns;
+            s_d <= '1';
+            wait for 10ns;
+            s_d <= '0';
+            wait for 10ns;
+            s_d <= '1';
+            wait for 10ns;
+            s_d <= '0';
+            wait for 10ns;
+            s_d <= '1';
+            wait for 10ns;
+            s_d <= '0'; 
+    
+    report "Stimulus process finished" severity note;
         wait;
     end process p_stimulus;
 
-end architecture testbench;
+end Behavioral;
+```
+**SIMULACER PICO**
+
+## 3.Flip Flops
+
+**p_d_ff_arts**
+
+```vhdl
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--use IEEE.NUMERIC_STD.ALL;
+
+-- Uncomment the following library declaration if instantiating
+-- any Xilinx leaf cells in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
+
+entity d_ff_arst is
+  Port ( 
+         clk     : in std_logic;
+         arst   : in std_logic;
+         d      : in std_logic;
+         q      : out std_logic;
+         q_bar  : out std_logic
+         );
+end d_ff_arst;
+
+architecture Behavioral of d_ff_arst is
+
+begin
+     p_d_latch : process (arst, clk)
+    begin
+        if (arst = '1') then
+            q <= '0';
+            q_bar <= '1';
+       
+        elsif rising_edge(clk) then
+            q <= d;
+            q_bar <= not d;   
+        
+        end if; 
+          
+    end process p_d_latch;  
+
+end Behavioral;
 ```
 
+**p_d_ff_rts**
 
-## Log
+```vhdl
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--use IEEE.NUMERIC_STD.ALL;
+
+-- Uncomment the following library declaration if instantiating
+-- any Xilinx leaf cells in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
+
+entity d_ff_arst is
+  Port ( 
+         clk     : in std_logic;
+         arst   : in std_logic;
+         d      : in std_logic;
+         q      : out std_logic;
+         q_bar  : out std_logic
+         );
+end d_ff_arst;
+
+architecture Behavioral of d_ff_arst is
+
+begin
+     p_d_latch : process (arst, clk)
+    begin
+        if (arst = '1') then
+            q <= '0';
+            q_bar <= '1';
+       
+        elsif rising_edge(clk) then
+            q <= d;
+            q_bar <= not d;   
+        
+        end if; 
+          
+    end process p_d_latch;  
+
+end Behavioral;
 ```
-analyze design.vhd
-analyze testbench.vhd
-elaborate tb_comparator_4bit
-testbench.vhd:33:9:@0ms:(report note): Stimulus process started
-testbench.vhd:44:9:@200ns:(assertion error): Chyba pro vstupní hodnoty: 0100, 0001
-testbench.vhd:54:9:@400ns:(assertion error): Chyba pro vstupní hodnoty: 0100, 0011
-testbench.vhd:59:9:@500ns:(assertion error): Chyba pro vstupní hodnoty: 0101, 0100
-testbench.vhd:121:9:@1600ns:(report note): Stimulus process finished
-Finding VCD file...
-./dump.vcd
-[2021-02-23 05:49:04 EST] Opening EPWave...
-Done
 
+**p_jk_ff_rst**
+
+```vhdl
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--use IEEE.NUMERIC_STD.ALL;
+
+-- Uncomment the following library declaration if instantiating
+-- any Xilinx leaf cells in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
+
+entity jk_ff_rst is
+  Port ( 
+         clk    : in std_logic;
+         rst    : in std_logic;
+         j      : in std_logic;
+         k      : in std_logic;
+         q      : out std_logic;
+         q_bar  : out std_logic
+  );
+end jk_ff_rst;
+
+architecture Behavioral of jk_ff_rst is
+
+    signal s_q : std_logic;
+
+begin
+ p_d_latch : process (clk)
+    begin
+        if rising_edge(clk) then
+           
+            if (rst = '1')then
+                s_q <= '0';
+            
+            else
+                
+                if (j = '0' and k = '0')then
+                    s_q <= s_q;
+               
+                elsif (j = '0' and k = '1')then  
+                    s_q <= '0';
+              
+                elsif (j = '1' and k = '0')then 
+                    s_q <= '1';
+              
+                elsif (j = '1' and k = '1')then  
+                    s_q <= not s_q;                 
+                
+                end if;
+             
+            end if;
+             
+        end if; 
+          
+    end process p_d_latch; 
+
+    q <= s_q;
+    q_bar <= not s_q;
+
+end Behavioral;
 ```
 
-## EPWare
+**p_t_ff_rst**
 
-![EPWare](images/EPWare.PNG)
+```vhdl
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
 
-## EDAplayground link
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--use IEEE.NUMERIC_STD.ALL;
 
-[https://www.edaplayground.com/x/qvYn](https://www.edaplayground.com/x/qvYn)
+-- Uncomment the following library declaration if instantiating
+-- any Xilinx leaf cells in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
+
+entity t_ff_rst is
+  Port ( 
+         clk     : in std_logic;
+         rst   : in std_logic;
+         t      : in std_logic;
+         q      : out std_logic;
+         q_bar  : out std_logic
+  );
+end t_ff_rst;
+
+architecture Behavioral of t_ff_rst is
+
+    signal s_q : std_logic;
+
+begin
+ p_t_ff_rst : process (clk)
+    begin
+        if rising_edge(clk) then
+           
+            if (rst = '1')then
+                s_q <= '0';
+            
+            else
+                
+                if (t = '0')then
+                    s_q <= s_q;
+               
+                elsif (t = '1')then  
+                    s_q <= not s_q;                 
+                
+                end if;
+             
+            end if;
+             
+        end if; 
+          
+    end process p_t_ff_rst; 
+
+    q <= s_q;
+    q_bar <= not s_q;
+
+
+end Behavioral;
+```
 
 
