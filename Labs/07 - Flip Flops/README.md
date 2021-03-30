@@ -527,3 +527,8 @@ end Behavioral;
 ![Sim(tb_jk_ff_rst)](Images/Sim(tb_jk_ff_rst).PNG)
 **Simulation tb_t_ff_rst**
 ![Sim(tb_t_ff_rst)](Images/Sim(tb_t_ff_rst).PNG)
+
+## 4. Image
+
+![image](obrazek.png)
+
