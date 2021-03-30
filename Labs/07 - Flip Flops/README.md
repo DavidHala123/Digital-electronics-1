@@ -1,28 +1,41 @@
-## 1.Logic table
+## 1.Preparation
 
 
-| **Dec. equivalent** | **B[1:0]** | **A[1:0]** | **B is greater than A** | **B equals A** | **B is less than A** |
-| :-: | :-: | :-: | :-: | :-: | :-: |
-| 0 | 0 0 | 0 0 | 0 | 1 | 0 |
-| 1 | 0 0 | 0 1 | 0 | 0 | 1 |
-| 2 | 0 0 | 1 0 | 0 | 0 | 1 |
-| 3 | 0 0 | 1 1 | 0 | 0 | 1 |
-| 4 | 0 1 | 0 0 | 1 | 0 | 0 |
-| 5 | 0 1 | 0 1 | 0 | 1 | 0 |
-| 6 | 0 1 | 1 0 | 0 | 0 | 1 |
-| 7 | 0 1 | 1 1 | 0 | 0 | 1 |
-| 8 | 1 0 | 0 0 | 1 | 0 | 0 |
-| 9 | 1 0 | 0 1 | 1 | 0 | 0 |
-| 10 | 1 0 | 1 0 | 0 | 1 | 0 |
-| 11 | 1 0 | 1 1 | 0 | 0 | 1 |
-| 12 | 1 1 | 0 0 | 1 | 0 | 0 |
-| 13 | 1 1 | 0 1 | 1 | 0 | 0 |
-| 14 | 1 1 | 1 0 | 1 | 0 | 0 |
-| 15 | 1 1 | 1 1 | 0 | 1 | 0 |
+![Characteristic equations](Images/eq_flip_flops.png)
+<!--
+\begin{align*}
+    q_{n+1}^D =&~ \\
+    q_{n+1}^{JK} =&\\
+    q_{n+1}^T =&\\
+\end{align*}-->
+
+   | **clk** | **d** | **q(n)** | **q(n+1)** | **Comments** |
+   | :-: | :-: | :-: | :-: | :-- |
+   | ![rising](Images/eq_uparrow.png) | 0 | 0 |  |  |
+   | ![rising](Images/eq_uparrow.png) | 0 | 1 |  |  |
+   | ![rising](Images/eq_uparrow.png) | 1 |  |  |  |
+   | ![rising](Images/eq_uparrow.png) | 1 |  |  |  |
+
+   | **clk** | **j** | **k** | **q(n)** | **q(n+1)** | **Comments** |
+   | :-: | :-: | :-: | :-: | :-: | :-- |
+   | ![rising](Images/eq_uparrow.png) | 0 | 0 | 0 | 0 | No change |
+   | ![rising](Images/eq_uparrow.png) | 0 | 0 | 1 | 1 | No change |
+   | ![rising](Images/eq_uparrow.png) | 0 |  |  |  |  |
+   | ![rising](Images/eq_uparrow.png) | 0 |  |  |  |  |
+   | ![rising](Images/eq_uparrow.png) | 1 |  |  |  |  |
+   | ![rising](Images/eq_uparrow.png) | 1 |  |  |  |  |
+   | ![rising](Images/eq_uparrow.png) | 1 |  |  |  |  |
+   | ![rising](Images/eq_uparrow.png) | 1 |  |  |  |  |
+
+   | **clk** | **t** | **q(n)** | **q(n+1)** | **Comments** |
+   | :-: | :-: | :-: | :-: | :-- |
+   | ![rising](Images/eq_uparrow.png) | 0 | 0 |  |  |
+   | ![rising](Images/eq_uparrow.png) | 0 | 1 |  |  |
+   | ![rising](Images/eq_uparrow.png) | 1 |  |  |  |
+   | ![rising](Images/eq_uparrow.png) | 1 |  |  |  |
 
 
-
-**f(B=a) = (!b1.!b0.!a1.!a0) + (!b1.b0.!a1.a0) + (b1.!b0.a1.!a0) + (b1.b0.a1.a0)**
+<!--
 
 
 **f(B<A) = (b1+b1+a1+a1) . (b1+!b0+a1+a1) . (b1+!b0+a1+!a0) . (!b1+b0+a1+a0) . (!b1+b0+a1+!a0) . (!b1+b0+!a1+a0) . (!b1+!b0+a1+a0) . (!b1+!b0+a1+!a0) . (!b1+!b0+!a1+a0) . (!b1+!b0+!a1+!a0)**
