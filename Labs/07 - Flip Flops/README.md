@@ -209,7 +209,8 @@ p_reset_gen : process
 
 end Behavioral;
 ```
-**SIMULACER PICO**
+![Sim(tb_d)](Images/eq_uparrow.png)
+![rising](Images/eq_uparrow.png)
 
 ## 3.Flip Flops
 
