@@ -430,14 +430,6 @@ begin
 
 end Behavioral;
 ```
-**Simulation tb_d_ff_arst**
-![Sim(tb_d_ff_ars)](Images/Sim(tb_d_ff_arst).PNG)
-**Simulation tb_ik_ff_rst**
-![Sim(tb_ik_ff_rst)](Images/Sim(tb_ik_ff_rst).PNG)
-**Simulation tb_jk_ff_rst**
-![Sim(tb_jk_ff_rst)](Images/Sim(tb_jk_ff_rst).PNG)
-**Simulation tb_t_ff_rst**
-![Sim(tb_t_ff_rst)](Images/Sim(tb_t_ff_rst).PNG)
 
 
 **clock, reset and stimulus processes from the testbench (taken from tb_jk_ff)**
@@ -527,3 +519,11 @@ end Behavioral;
 end Behavioral;
 ```
 
+**Simulation tb_d_ff_arst**
+![Sim(tb_d_ff_ars)](Images/Sim(tb_d_ff_arst).PNG)
+**Simulation tb_ik_ff_rst**
+![Sim(tb_ik_ff_rst)](Images/Sim(tb_ik_ff_rst).PNG)
+**Simulation tb_jk_ff_rst**
+![Sim(tb_jk_ff_rst)](Images/Sim(tb_jk_ff_rst).PNG)
+**Simulation tb_t_ff_rst**
+![Sim(tb_t_ff_rst)](Images/Sim(tb_t_ff_rst).PNG)
