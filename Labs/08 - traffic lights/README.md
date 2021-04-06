@@ -151,6 +151,10 @@ OBRAZEK DOPLNIT
 
 ## 3.Smart controller
 
+**State diagram**
+
+![Simulation](Images/state_diagram2.png)
+
 
 **Tables**
 
