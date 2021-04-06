@@ -1,93 +1,11 @@
-## 1.Logic table
+## 1.Preparation
 
+| **Input P** | `0` | `0` | `1` | `1` | `0` | `1` | `0` | `1` | `1` | `1` | `1` | `0` | `0` | `1` | `1` | `1` |
+| :-- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| **Clock** | ![rising](Images/eq_uparrow.png) | ![rising](Images/eq_uparrow.png) | ![rising](Images/eq_uparrow.png) | ![rising](Images/eq_uparrow.png) | ![rising](Images/eq_uparrow.png) | ![rising](Images/eq_uparrow.png) | ![rising](Images/eq_uparrow.png) | ![rising](Images/eq_uparrow.png) | ![rising](Images/eq_uparrow.png) | ![rising](Images/eq_uparrow.png) | ![rising](Images/eq_uparrow.png) | ![rising](Images/eq_uparrow.png) | ![rising](Images/eq_uparrow.png) | ![rising](Images/eq_uparrow.png) | ![rising](Images/eq_uparrow.png) | ![rising](Images/eq_uparrow.png) |
+| **State** | A |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| **Output R** | `0` |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
 
-| **Dec. equivalent** | **B[1:0]** | **A[1:0]** | **B is greater than A** | **B equals A** | **B is less than A** |
-| :-: | :-: | :-: | :-: | :-: | :-: |
-| 0 | 0 0 | 0 0 | 0 | 1 | 0 |
-| 1 | 0 0 | 0 1 | 0 | 0 | 1 |
-| 2 | 0 0 | 1 0 | 0 | 0 | 1 |
-| 3 | 0 0 | 1 1 | 0 | 0 | 1 |
-| 4 | 0 1 | 0 0 | 1 | 0 | 0 |
-| 5 | 0 1 | 0 1 | 0 | 1 | 0 |
-| 6 | 0 1 | 1 0 | 0 | 0 | 1 |
-| 7 | 0 1 | 1 1 | 0 | 0 | 1 |
-| 8 | 1 0 | 0 0 | 1 | 0 | 0 |
-| 9 | 1 0 | 0 1 | 1 | 0 | 0 |
-| 10 | 1 0 | 1 0 | 0 | 1 | 0 |
-| 11 | 1 0 | 1 1 | 0 | 0 | 1 |
-| 12 | 1 1 | 0 0 | 1 | 0 | 0 |
-| 13 | 1 1 | 0 1 | 1 | 0 | 0 |
-| 14 | 1 1 | 1 0 | 1 | 0 | 0 |
-| 15 | 1 1 | 1 1 | 0 | 1 | 0 |
-
-
-
-**f(B=a) = (!b1.!b0.!a1.!a0) + (!b1.b0.!a1.a0) + (b1.!b0.a1.!a0) + (b1.b0.a1.a0)**
-
-
-**f(B<A) = (b1+b1+a1+a1) . (b1+!b0+a1+a1) . (b1+!b0+a1+!a0) . (!b1+b0+a1+a0) . (!b1+b0+a1+!a0) . (!b1+b0+!a1+a0) . (!b1+!b0+a1+a0) . (!b1+!b0+a1+!a0) . (!b1+!b0+!a1+a0) . (!b1+!b0+!a1+!a0)**
-
-
-## K-maps
-
-![Karnaugh](images/excel_karnaugh3.png)
-
-**B>A:**
-
-SOP --> f(b>a) = (b1.!a1) + (b1.!a0) + (b0.!a1.!a0)
-
-POS --> f(b>a) = (b1+!a1) . (b1+!a0) . (b0+!a1+!a0)
-
-
-
-**B=A:**
-
-POS --> f(B=A) = (!b1.!b0.!a1.!a0) + (!b1.b0.!a1.a0) + (b1.b0.a1.a0) + (b1.!b0.a1.!a0)
-
-SOP --> f(B=A) = (!b1+!b0+!a1+!a0) . (!b1+b0+!a1+a0) . (b1+b0+a1+a0) . (b1+!b0+a1+!a0)
-
-
-
-**B<A:**
-
-POS --> f(B<A) = (b0.!a1) + (b1.b0) + (b1.!a1) + (!a1.!a0)
-
-SOP --> f(B<A) = (b0+!a0) . (b1+b0) . (b1+!a0) . (!a1+!a0)
-
-## Code
-
-**design.vhdl**
-
-```vhdl
-library IEEE;
-use IEEE.std_logic_1164.all;
-
-
-entity comparator_4bit is
-    port(
-        a_i           : in  std_logic_vector(4 - 1 downto 0);
-        b_i           : in  std_logic_vector(4 - 1 downto 0);
-
-        
-
-        B_greater_A_o : out std_logic;
-        B_equals_A_o  : out std_logic;
-        B_less_A_o    : out std_logic      
-    );
-end entity comparator_4bit;
-
-
-architecture Behavioral of comparator_4bit is
-begin
-
-    B_greater_A_o  <= '1' when (b_i > a_i) else '0';
-    B_equals_A_o   <= '1' when (b_i = a_i) else '0';
-    B_less_A_o     <= '1' when (b_i < a_i) else '0';
-
-
-end architecture Behavioral;
-
-```
 
 **testbench.vhdl**
 
@@ -218,31 +136,5 @@ begin
 
 end architecture testbench;
 ```
-
-
-## Log
-```
-analyze design.vhd
-analyze testbench.vhd
-elaborate tb_comparator_4bit
-testbench.vhd:33:9:@0ms:(report note): Stimulus process started
-testbench.vhd:44:9:@200ns:(assertion error): Chyba pro vstupní hodnoty: 0100, 0001
-testbench.vhd:54:9:@400ns:(assertion error): Chyba pro vstupní hodnoty: 0100, 0011
-testbench.vhd:59:9:@500ns:(assertion error): Chyba pro vstupní hodnoty: 0101, 0100
-testbench.vhd:121:9:@1600ns:(report note): Stimulus process finished
-Finding VCD file...
-./dump.vcd
-[2021-02-23 05:49:04 EST] Opening EPWave...
-Done
-
-```
-
-## EPWare
-
-![EPWare](images/EPWare.PNG)
-
-## EDAplayground link
-
-[https://www.edaplayground.com/x/qvYn](https://www.edaplayground.com/x/qvYn)
 
 
