@@ -154,17 +154,15 @@ OBRAZEK DOPLNIT
 
 **Tables**
 
-| **Current state** | **Direction South** | **Direction West** | **Delay** |
-| :-: | 
-| 00 |
+| **Current state (00)** | **Direction South** | **Direction West** | **Delay** |
 | :-: | :-: | :-: | :-: |
 | **SOUTH_GO** | green | red | - |
 | **WEST_GO** | red | green | - |
-| **RGB LED** | **Artix-7 pin names** | **Red** | **Yellow** |
-| :-: | :-: | :-: | :-: |
-| LD16 | N15, M16, R12 | `1,0,0` | `1,1,0` |
-| LD17 | N16, R11, G14 | `1,0,0` | `1,1,0` |
-
+| **Current state (01)** | **Direction South** | **Direction West** | **Delay** |
+| **SOUTH_GO** | green | red | 0 sec |
+| **SOUTH_WAIT** | yellow | red | 2 sec |
+| **STOP1** | red | red | 1 sec |
+| **WEST_GO** | red | green | - |
 
 
 **Code**
