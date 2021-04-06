@@ -156,8 +156,8 @@ OBRAZEK DOPLNIT
 
 | **Current state (00)** | **Direction South** | **Direction West** | **Delay** |
 | :-: | :-: | :-: | :-: |
-| **State** | A | A | B |
-| **Output R** | `0` | `0` | `0` |
+| **SOUTH_GO** | green | red | - |
+| **WEST_GO** | red | green | - |
 | **RGB LED** | **Artix-7 pin names** | **Red** | **Yellow** |
 | :-: | :-: | :-: | :-: |
 | LD16 | N15, M16, R12 | `1,0,0` | `1,1,0` |
