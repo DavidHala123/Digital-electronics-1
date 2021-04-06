@@ -142,3 +142,5 @@ OBRAZEK DOPLNIT
     end process p_output_fsm;
 ```
 
+**Simulation**
+![Simulation](Images/08-graph.PNG)
