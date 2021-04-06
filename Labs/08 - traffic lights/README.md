@@ -154,7 +154,9 @@ OBRAZEK DOPLNIT
 
 **Tables**
 
-| **Current state (00)** | **Direction South** | **Direction West** | **Delay** |
+| **Current state** | **Direction South** | **Direction West** | **Delay** |
+| :-: | 
+| 00 |
 | :-: | :-: | :-: | :-: |
 | **SOUTH_GO** | green | red | - |
 | **WEST_GO** | red | green | - |
