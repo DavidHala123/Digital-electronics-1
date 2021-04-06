@@ -158,21 +158,21 @@ OBRAZEK DOPLNIT
 
 **Tables**
 
-|     | **Current state** | **Direction South** | **Direction West** | **Delay** |
+| **00:** | **Current state** | **Direction South** | **Direction West** | **Delay** |
 | :-: | :-: | :-: | :-: | :-: |
 |  | **SOUTH_GO** | green | red | - |
 |  | **WEST_GO** | red | green | - |
-|     | **Current state (01)** | **Direction South** | **Direction West** | **Delay** |
+| **01** | **--** | **--** | **--** | **--** |
 |  | **SOUTH_GO** | green | red | 0 sec |
 |  | **SOUTH_WAIT** | yellow | red | 2 sec |
 |  | **STOP1** | red | red | 1 sec |
 |  | **WEST_GO** | red | green | - |
-|     | **Current state (10)** | **Direction South** | **Direction West** | **Delay** |
+| **10** | **--** | **--** | **--** | **--** |
 |  | **WEST_GO** | red | green | 0 sec |
 |  | **WEST_WAIT** | red | yellow | 2 sec |
 |  | **STOP2** | red | red | 1 sec |
 |  | **SOUTH_GO** | green | red | - |
-|     | **Current state (01)** | **Direction South** | **Direction West** | **Delay** |
+| **01** | **--** | **--** | **--** | **--** |
 |  | **STOP1** | red | red | 1 sec |
 |  | **WEST_GO** | red | green | 4 sec |
 |  | **WEST_WAIT** | red | yellow | 2 sec |
