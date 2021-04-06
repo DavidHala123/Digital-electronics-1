@@ -159,7 +159,7 @@ OBRAZEK DOPLNIT
 **Tables**
 
 | **Current state (00)** | **Direction South** | **Direction West** | **Delay** |
-|  | :-: | :-: | :-: | :-: |
+| :-: | :-: | :-: | :-: | :-: |
 |  | **SOUTH_GO** | green | red | - |
 |  | **WEST_GO** | red | green | - |
 | **Current state (01)** | **Direction South** | **Direction West** | **Delay** |
@@ -173,7 +173,6 @@ OBRAZEK DOPLNIT
 |  | **STOP2** | red | red | 1 sec |
 |  | **SOUTH_GO** | green | red | - |
 | **Current state (01)** | **Direction South** | **Direction West** | **Delay** |
-|  | :-: | :-: | :-: | :-: |
 |  | **STOP1** | red | red | 1 sec |
 |  | **WEST_GO** | red | green | 4 sec |
 |  | **WEST_WAIT** | red | yellow | 2 sec |
