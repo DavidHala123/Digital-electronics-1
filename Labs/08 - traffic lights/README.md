@@ -15,6 +15,8 @@ OBRAZEK DOPLNIT
 
 ## 2.Traffic light controller
 
+**State diagram**
+![Simulation](Images/state_diagram.png)
 
 **p_traffic_fsm**
 ```vhdl
