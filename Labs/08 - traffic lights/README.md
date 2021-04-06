@@ -162,17 +162,17 @@ OBRAZEK DOPLNIT
 | :-: | :-: | :-: | :-: | :-: |
 |  | **SOUTH_GO** | green | red | - |
 |  | **WEST_GO** | red | green | - |
-| **01** | **--** | **--** | **--** | **--** |
+| **01:** | **--** | **--** | **--** | **--** |
 |  | **SOUTH_GO** | green | red | 0 sec |
 |  | **SOUTH_WAIT** | yellow | red | 2 sec |
 |  | **STOP1** | red | red | 1 sec |
 |  | **WEST_GO** | red | green | - |
-| **10** | **--** | **--** | **--** | **--** |
+| **10:** | **--** | **--** | **--** | **--** |
 |  | **WEST_GO** | red | green | 0 sec |
 |  | **WEST_WAIT** | red | yellow | 2 sec |
 |  | **STOP2** | red | red | 1 sec |
 |  | **SOUTH_GO** | green | red | - |
-| **01** | **--** | **--** | **--** | **--** |
+| **01:** | **--** | **--** | **--** | **--** |
 |  | **STOP1** | red | red | 1 sec |
 |  | **WEST_GO** | red | green | 4 sec |
 |  | **WEST_WAIT** | red | yellow | 2 sec |
